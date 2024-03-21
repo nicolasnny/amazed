@@ -5,7 +5,8 @@
 ## Makefile for miniprintd
 ##
 
-SRC	=	src/main.c
+SRC	=	src/main.c	\
+		src/store_data.c	\
 
 OBJ	=	$(SRC:.c=.o)
 
