@@ -5,9 +5,12 @@
 ** main.c
 */
 
+#include <stdio.h>
+#include <unistd.h>
+#include "../include/my.h"
 #include "amazed.h"
 
 int main(void)
 {
-    return SUCCESS;
+    return file_valid();
 }
