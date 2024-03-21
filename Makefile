@@ -5,7 +5,11 @@
 ## Makefile for miniprintd
 ##
 
-SRC	=	src/main.c
+SRC	=	src/main.c	\
+		src/algo.c	\
+		src/linked_list.c	\
+		src/node.c	\
+		src/clean.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

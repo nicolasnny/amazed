@@ -29,6 +29,8 @@ SRC	=	my_char_not_in_str.c		\
 		my_str_from_char.c			\
 		my_strn_array_dup.c			\
 		mini_printf.c				\
+		my_putstr_err.c	\
+		my_putchar_err.c	\
 
 
 OBJ	=	$(SRC:.c=.o)

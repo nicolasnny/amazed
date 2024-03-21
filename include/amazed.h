@@ -22,11 +22,15 @@
 int add_to_queue(linked_list_t *queue, node_t *node);
 
 // --> nodes
-node_t get_element_in_queue(linked_list_t *queue);
+node_t *get_element_in_queue(linked_list_t *queue);
 void set_as_visited(node_t *node, node_t *parent);
+node_t *get_node_from_id(linked_list_t *list, int id);
 
 // --> algorithm
-void find_shortest_path(linked_list_t *nodes, int **link_array,
+path_t *find_shortest_path(linked_list_t *nodes, int **link_array,
     node_t *root, node_t *goal);
+
+// --> clean
+int free_queue(linked_list_t *queue);
 
 #endif /*   A_MAZE_D    */

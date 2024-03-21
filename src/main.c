@@ -5,7 +5,7 @@
 ** main.c
 */
 
-#include "../include/amazed.h"
+#include "amazed.h"
 
 int main(void)
 {

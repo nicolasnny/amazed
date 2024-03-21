@@ -9,6 +9,7 @@
     #define AMAZED_STRUCT_H
 
 typedef struct node_s {
+    int id;
     bool checked;
     struct node_s *parent;
 } node_t;
