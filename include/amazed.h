@@ -10,4 +10,16 @@
     #define SUCCESS 0
     #define ERROR 84
 
+typedef struct node_s {
+    unsigned int x;
+    unsigned int y;
+    int checked;
+    struct node_s *parent;
+} node_t;
+
+typedef struct queue_s {
+    node_t *node;
+    struct queue_s *next;
+} queue_t;
+
 #endif /*   A_MAZE_D    */
