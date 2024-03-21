@@ -55,7 +55,18 @@ static int get_nb_col(char *buf, char *delim)
     return final_size;
 }
 
-static bool new_line(char **args, int *index, int nb_col, char *buf, int *i)
+void check_comment(char *buf, int *i)
+{
+    if ((buf[*i] == '#' && buf[*i + 1] == '#') || (buf[*i] == '#' &&
+        *i >= 0 && buf[*i - 1] == '#'))
+        return;
+    if (buf[*i] == '#') {
+        while (buf[*i] != '\n')
+            (*i)++;
+    }
+}
+
+static bool new_line(char **args, int *index, int *i, int nb_col, char *buf)
 {
     args[index[0]][index[1]] = '\0';
     index[1] = 0;
@@ -63,6 +74,7 @@ static bool new_line(char **args, int *index, int nb_col, char *buf, int *i)
     args[index[0]] = malloc(sizeof(char) * nb_col + 1);
     if (buf[(*i) + 1] != '\0')
         (*i)++;
+    check_comment(buf, i);
     return false;
 }
 
@@ -75,13 +87,20 @@ static int *init_index(void)
     return index;
 }
 
-static void finish_str_array(int *index, char **args)
+static char **finish_str_array(int *index, char **args)
 {
     if (index[1] > 0) {
         args[index[0]][index[1]] = '\0';
         index[0]++;
     }
     args[index[0]] = NULL;
+    return args;
+}
+
+static void add_char(char **args, int *index, char new_char)
+{
+    args[index[0]][index[1]] = new_char;
+    index[1]++;
 }
 
 char **my_str_to_word_array(char *buf, char *delim)
@@ -93,15 +112,13 @@ char **my_str_to_word_array(char *buf, char *delim)
 
     args[index[0]] = malloc(sizeof(char) * nb_col + 1);
     for (int i = 0; buf[i] != '\0'; i++){
+        check_comment(buf, &i);
         if (!in_delim(buf[i], delim))
             add_line = true;
         if (buf[i] != '\0' && in_delim(buf[i], delim) && add_line)
-            add_line = new_line(args, index, nb_col, buf, &i);
-        if (buf[i] != '\0' && !in_delim(buf[i], delim)) {
-            args[index[0]][index[1]] = buf[i];
-            index[1]++;
-        }
+            add_line = new_line(args, index, &i, nb_col, buf);
+        if (buf[i] != '\0' && !in_delim(buf[i], delim))
+            add_char(args, index, buf[i]);
     }
-    finish_str_array(index, args);
-    return args;
+    return finish_str_array(index, args);
 }

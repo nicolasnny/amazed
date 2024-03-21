@@ -5,9 +5,11 @@
 ** amazed.h
 */
 
-#ifndef A_MAZE_D
-    #define A_MAZE_D
+#ifndef AMAZED_H
+    #define AMAZED_H
     #define SUCCESS 0
     #define ERROR 84
+
+int file_valid(void);
 
 #endif /*   A_MAZE_D    */
