@@ -5,10 +5,12 @@
 ** amazed.h
 */
 
-#ifndef A_MAZE_D
-    #define A_MAZE_D
+#ifndef AMAZED_H
+    #define AMAZED_H
 
     #include <stdbool.h>
+    #include "my.h"
+    #include "amazed_struct.h"
 
     #define SUCCESS 0
     #define ERROR 84
@@ -16,20 +18,15 @@
     #define LINK 1
     #define NO_LINK 0
 
-typedef struct node_s {
-    bool checked;
-    bool end;
-    struct node_s *parent;
-} node_t;
+// --> linked list
+int add_to_queue(linked_list_t *queue, node_t *node);
 
-typedef struct linked_list_s {
-    node_t *node;
-    struct linked_list_s *next;
-} linked_list_t;
+// --> nodes
+node_t get_element_in_queue(linked_list_t *queue);
+void set_as_visited(node_t *node, node_t *parent);
 
-typedef struct path_s {
-    linked_list_t *list;
-    unsigned int lenght;
-} path_t;
+// --> algorithm
+void find_shortest_path(linked_list_t *nodes, int **link_array,
+    node_t *root, node_t *goal);
 
 #endif /*   A_MAZE_D    */
