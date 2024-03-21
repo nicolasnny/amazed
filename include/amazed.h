@@ -6,6 +6,7 @@
 */
 
 #include <stdbool.h>
+#include "struct.h"
 
 #ifndef AMAZED_H
     #define AMAZED_H
@@ -13,5 +14,6 @@
     #define ERROR 84
 
 int file_valid(void);
+int **init_map(char **buffer, linked_list_t *node_list);
 
 #endif /*   A_MAZE_D    */

@@ -73,7 +73,9 @@ int stock_file(char **array)
     linked_list_t *rooms = get_rooms(array);
     char **connections = get_connections(array);
 
+    init_map(connections, rooms);
     free_str_array(array);
+    free_str_array(connections);
     return SUCCESS;
 }
 

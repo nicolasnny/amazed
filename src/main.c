@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "../include/my.h"
+#include "my.h"
 #include "amazed.h"
 
 int main(void)

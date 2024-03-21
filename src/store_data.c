@@ -9,13 +9,14 @@
 #include <stdlib.h>
 #include "amazed.h"
 #include "my.h"
+#include "struct.h"
 
 static void fill_matrix(int **map, int matrix_size)
 {
-    for (int y = 0; map[y] != NULL; y++) {
+    for (int y = 0; y != matrix_size; y++) {
         map[y] = malloc(sizeof(int) * (matrix_size + 1));
         map[y][matrix_size] = -1;
-        for (int x = 0; map[y][x] != -1; x++)
+        for (int x = 0; x != matrix_size; x++)
             map[y][x] = 0;
     }
 }
@@ -52,8 +53,8 @@ static int store_data(char **buffer, linked_list_t *node_list, int **map)
         link = my_str_to_word_array(buffer[i], "-");
         if (link[1] == NULL)
             return ERROR;
-        id_left = name2id(link[0], node_list);
-        id_right = name2id(link[1], node_list);
+        id_left = name2id(link[0], node_list) - 1;
+        id_right = name2id(link[1], node_list) - 1;
         map[id_left][id_right] = 1;
         map[id_right][id_left] = 1;
     }
@@ -72,7 +73,13 @@ int **init_map(char **buffer, linked_list_t *node_list)
         return NULL;
     map[maxtrix_size] = NULL;
     fill_matrix(map, maxtrix_size);
-    if (store_data(buffer, node_list, map) == NULL)
+    if (store_data(buffer, node_list, map) == ERROR)
         return NULL;
+    for (int y = 0; map[y] != NULL; y++) {
+        for (int x = 0; map[y][x] != -1; x++) {
+            printf("%d", map[y][x]);
+        }
+        printf("\n");
+    }
     return map;
 }
