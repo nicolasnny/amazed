@@ -9,5 +9,5 @@
 
 int main(void)
 {
-    return SUCCESS;
+    return file_valid();
 }

@@ -33,4 +33,6 @@ path_t *find_shortest_path(linked_list_t *nodes, int **link_array,
 // --> clean
 int free_queue(linked_list_t *queue);
 
+int file_valid(void);
+
 #endif /*   A_MAZE_D    */
