@@ -44,6 +44,29 @@ static int name2id(char *name, linked_list_t *node_list)
     return -1;
 }
 
+static char **separate_by_name(char *buffer, linked_list_t *node_list)
+{
+    char **res = malloc(sizeof(char *) * 3);
+    linked_list_t *temp = node_list;
+    int rest_to_cpy = 0;
+    int counter = 0;
+
+    res[2] = NULL;
+    while (temp && find_str(buffer, temp->node->name) != 0)
+        temp = temp->next;
+    if (!temp)
+        return NULL;
+    res[0] = my_strdup(temp->node->name);
+    rest_to_cpy = my_strlen(buffer) - my_strlen(temp->node->name);
+    res[1] = malloc(sizeof(char) * rest_to_cpy);
+    for (int i = my_strlen(buffer) - 1; counter < rest_to_cpy; counter++) {
+        res[1][counter] = buffer[i];
+        i--;
+    }
+    res[1][counter - 1] = '\0';
+    return res;
+}
+
 static int store_data(char **buffer, linked_list_t *node_list, int **map)
 {
     char **link = NULL;
@@ -51,9 +74,11 @@ static int store_data(char **buffer, linked_list_t *node_list, int **map)
     int id_right = 0;
 
     for (int i = 0; buffer[i] != NULL; i++) {
-        link = my_str_to_word_array(buffer[i], "-");
-        if (link[1] == NULL)
+        link = separate_by_name(buffer[i], node_list);
+        if (link == NULL) {
+            my_putstr_err("ERROR: Node not found in the list\n");
             return ERROR;
+        }
         id_left = name2id(link[0], node_list);
         id_right = name2id(link[1], node_list);
         map[id_left][id_right] = 1;
