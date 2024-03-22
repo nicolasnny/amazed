@@ -8,7 +8,8 @@
 SRC	=	src/error_handling.c	\
 		src/get_data.c			\
 		src/amazed.c			\
-		src/main.c
+		src/main.c	\
+		src/store_data.c	\
 
 OBJ	=	$(SRC:.c=.o)
 
