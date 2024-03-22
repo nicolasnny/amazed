@@ -51,6 +51,8 @@ CS_CLEAN = *.log
 
 CS_REPORT = coding-style-reports.log
 
+UT_CLEAN	=	*.gcda *.gcno
+
 all:	lib $(NAME)
 
 lib:
@@ -67,6 +69,8 @@ fclean:	clean
 	$(RM) $(NAME)
 	$(RM) lib/my/$(LIBNAME)
 	$(RM) $(CS_CLEAN)
+	$(RM) $(UT_CLEAN)
+	$(RM) $(UT_BIN)
 
 re:	fclean all
 
