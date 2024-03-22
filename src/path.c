@@ -20,7 +20,7 @@ static int error_handling(linked_list_t *path_list, node_t *root, node_t *goal)
     return SUCCESS;
 }
 
-linked_list_t *get_path(node_t *root, node_t *goal)
+linked_list_t *get_path(node_t *goal, node_t *root)
 {
     linked_list_t *path_list = malloc(sizeof(linked_list_t));
     node_t *node = goal;
@@ -28,7 +28,7 @@ linked_list_t *get_path(node_t *root, node_t *goal)
     if (error_handling(path_list, root, goal) == ERROR)
         return NULL;
     path_list = NULL;
-    while (node != NULL && node->id != goal->id) {
+    while (node != NULL && node->id != root->id) {
         add_to_queue(&path_list, node);
         node = node->parent;
     }
