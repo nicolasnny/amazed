@@ -20,10 +20,8 @@ bool valid_robot_quantity(char **array)
     return true;
 }
 
-char **get_valid_part(char *buf)
+char **get_valid_part(char **line_array)
 {
-    char **line_array = my_str_to_word_array(buf, "\n");
-
     if (!valid_robot_quantity(line_array))
         return NULL;
     return line_array;

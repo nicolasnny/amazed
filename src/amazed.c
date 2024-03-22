@@ -19,7 +19,7 @@ static char **get_input(void)
     if (read(STDIN_FILENO, buf, BUFSIZ) == -1)
         return NULL;
     line_array = my_str_to_word_array(buf, "\n");
-    return line_array;
+    return get_valid_part(line_array);
 }
 
 int amazed(void)

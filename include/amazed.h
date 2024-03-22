@@ -40,7 +40,7 @@ int free_queue(linked_list_t *queue);
 linked_list_t *get_rooms(char **array);
 char **get_connections(char **array);
 int amazed(void);
-char **get_valid_part(char *buf);
+char **get_valid_part(char **line_array);
 int **init_map(char **buffer, linked_list_t *node_list);
 
 #endif /*   A_MAZE_D    */
