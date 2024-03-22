@@ -13,6 +13,8 @@ typedef struct node_s {
     int id;
     char *name;
     bool checked;
+    bool start;
+    bool end;
     struct node_s *parent;
 } node_t;
 

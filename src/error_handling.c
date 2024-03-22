@@ -7,12 +7,24 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdbool.h>
 #include <stdlib.h>
 #include "amazed.h"
+
+bool valid_robot_quantity(char **array)
+{
+    int robot_quantity = my_getnbr(array[0]);
+
+    if (robot_quantity <= 0)
+        return false;
+    return true;
+}
 
 char **get_valid_part(char *buf)
 {
     char **line_array = my_str_to_word_array(buf, "\n");
 
-    return SUCCESS;
+    if (!valid_robot_quantity(line_array))
+        return NULL;
+    return line_array;
 }
