@@ -10,10 +10,11 @@
 
     #include <stdbool.h>
     #include "my.h"
-    #include "amazed_struct.h"
+    #include "struct.h"
 
     #define SUCCESS 0
     #define ERROR 84
+    #define SYS_ERROR -1
     #define END_ARRAY -1
     #define LINK 1
     #define NO_LINK 0
@@ -27,9 +28,9 @@ void set_as_visited(node_t *node, node_t *parent);
 node_t *get_node_from_id(linked_list_t *list, int id);
 
 // --> algorithm
-path_t *find_shortest_path(linked_list_t *nodes, int **link_array,
+linked_list_t *find_shortest_path(linked_list_t *nodes, int **link_array,
     node_t *root, node_t *goal);
-
+linked_list_t *get_path(node_t *goal, node_t *root);
 // --> clean
 int free_queue(linked_list_t *queue);
 

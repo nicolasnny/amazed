@@ -21,7 +21,8 @@ node_t *get_element_in_queue(linked_list_t *queue)
         prev = queue;
         queue = queue->next;
     }
-    prev->next = NULL;
+    if (prev != NULL)
+        prev->next = NULL;
     node = queue->node;
     free(queue);
     return node;

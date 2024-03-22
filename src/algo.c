@@ -43,14 +43,14 @@ static void check_compatibilities(linked_list_t *nodes,
     }
 }
 
-path_t *find_shortest_path(linked_list_t *nodes,
+linked_list_t *find_shortest_path(linked_list_t *nodes,
     int **link_array, node_t *root, node_t *goal)
 {
     linked_list_t *queue = create_queue(root);
     node_t *current = NULL;
     node_t *parent = root;
 
-    if (root == NULL || queue == NULL) {
+    if (root == NULL || queue == NULL || goal == NULL) {
         my_putstr_err("Error while checking 'find ");
         my_putstr_err("shortest path' initialisation\n");
         return NULL;
@@ -60,7 +60,7 @@ path_t *find_shortest_path(linked_list_t *nodes,
         current = get_element_in_queue(queue);
         if (current->id == goal->id) {
             free_queue(queue);
-            return 0;//get_path(nodes, parent, goal, root);
+            return get_path(goal, root);
         }
         check_compatibilities(nodes, queue, link_array, current);
     }

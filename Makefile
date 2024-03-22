@@ -13,6 +13,7 @@ SRC	=	src/main.c	\
 		src/node.c	\
 		src/clean.c	\
 		src/error_handling.c	\
+		src/path.c	\
 
 UT_SRC	=	tests/unit_tests.c	\
 		src/algo.c	\
@@ -20,6 +21,7 @@ UT_SRC	=	tests/unit_tests.c	\
 		src/node.c	\
 		src/clean.c	\
 		src/error_handling.c	\
+		src/path.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

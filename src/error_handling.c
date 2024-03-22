@@ -8,9 +8,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "../include/amazed.h"
-#include "../include/my.h"
-#include "../include/struct.h"
+#include "amazed.h"
 
 static linked_list_t *insert_room(linked_list_t *rooms, char *content)
 {
@@ -82,7 +80,7 @@ int file_valid(void)
     char buf[BUFSIZ] = {0};
     char **line_array;
 
-    if (read(STDIN_FILENO, buf, BUFSIZ) == -1)
+    if (read(STDIN_FILENO, buf, BUFSIZ) == SYS_ERROR)
         return ERROR;
     line_array = my_str_to_word_array(buf, "\n");
     return stock_file(line_array);
