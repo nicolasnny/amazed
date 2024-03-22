@@ -29,7 +29,7 @@ linked_list_t *get_path(node_t *root, node_t *goal)
         return NULL;
     path_list = NULL;
     while (node != NULL && node->id != goal->id) {
-        add_to_queue(path_list, node);
+        add_to_queue(&path_list, node);
         node = node->parent;
     }
     return path_list;

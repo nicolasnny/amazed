@@ -27,11 +27,13 @@ int amazed(void)
     char **data = get_input();
     linked_list_t *rooms = NULL;
     char **connections = NULL;
+    int **link_array = NULL;
 
     if (!data)
         return ERROR;
     rooms = get_rooms(data);
     connections = get_connections(data);
-    init_map(connections, rooms);
+    link_array = init_map(connections, rooms);
+    find_shortest_path(rooms, link_array);
     return SUCCESS;
 }

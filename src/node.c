@@ -21,9 +21,11 @@ node_t *get_element_in_queue(linked_list_t *queue)
         prev = queue;
         queue = queue->next;
     }
+    node = queue->node;
     if (prev != NULL)
         prev->next = NULL;
-    node = queue->node;
+    else
+        queue = NULL;
     free(queue);
     return node;
 }
@@ -43,4 +45,26 @@ void set_as_visited(node_t *node, node_t *parent)
         return;
     node->checked = true;
     node->parent = parent;
+}
+
+node_t *get_root_node(linked_list_t *list)
+{
+    while (list != NULL && list->node->start != true)
+        list = list->next;
+    if (list == NULL) {
+        my_putstr_err("Error: couldn't find the starting room\n");
+        return NULL;
+    }
+    return list->node;
+}
+
+node_t *get_goal_node(linked_list_t *list)
+{
+    while (list != NULL && list->node->end != true)
+        list = list->next;
+    if (list == NULL) {
+        my_putstr_err("Error: couldn't find the ending room\n");
+        return NULL;
+    }
+    return list->node;
 }

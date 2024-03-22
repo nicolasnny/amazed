@@ -23,17 +23,21 @@
     #define NO_LINK 0
 
 // --> linked list
-int add_to_queue(linked_list_t *queue, node_t *node);
+int add_to_queue(linked_list_t **queue, node_t *node);
+unsigned int get_list_size(linked_list_t *list);
+void display_list_name(linked_list_t *list);
 
 // --> nodes
 node_t *get_element_in_queue(linked_list_t *queue);
 void set_as_visited(node_t *node, node_t *parent);
 node_t *get_node_from_id(linked_list_t *list, int id);
+node_t *get_root_node(linked_list_t *list);
+node_t *get_goal_node(linked_list_t *list);
 
 // --> algorithm
-linked_list_t *find_shortest_path(linked_list_t *nodes, int **link_array,
-    node_t *root, node_t *goal);
+linked_list_t *find_shortest_path(linked_list_t *nodes, int **link_array);
 linked_list_t *get_path(node_t *goal, node_t *root);
+
 // --> clean
 int free_queue(linked_list_t *queue);
 
