@@ -50,7 +50,7 @@ linked_list_t *find_shortest_path(linked_list_t *nodes,
     node_t *current = NULL;
     node_t *parent = root;
 
-    if (root == NULL || queue == NULL || goal == NULL) {
+    if (root == NULL || queue == NULL || goal == NULL || nodes == NULL) {
         my_putstr_err("Error while checking 'find ");
         my_putstr_err("shortest path' initialisation\n");
         return NULL;

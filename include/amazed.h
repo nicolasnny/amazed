@@ -5,6 +5,9 @@
 ** amazed.h
 */
 
+#include <stdbool.h>
+#include "struct.h"
+
 #ifndef AMAZED_H
     #define AMAZED_H
 
@@ -34,6 +37,10 @@ linked_list_t *get_path(node_t *goal, node_t *root);
 // --> clean
 int free_queue(linked_list_t *queue);
 
-int file_valid(void);
+linked_list_t *get_rooms(char **array);
+char **get_connections(char **array);
+int amazed(void);
+char **get_valid_part(char *buf);
+int **init_map(char **buffer, linked_list_t *node_list);
 
 #endif /*   A_MAZE_D    */

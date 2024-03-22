@@ -8,6 +8,9 @@
 CC	=	gcc
 
 SRC	=	src/main.c	\
+		src/get_data.c			\
+		src/amazed.c			\
+		src/store_data.c	\
 		src/algo.c	\
 		src/linked_list.c	\
 		src/node.c	\
@@ -16,6 +19,9 @@ SRC	=	src/main.c	\
 		src/path.c	\
 
 UT_SRC	=	tests/unit_tests.c	\
+		src/get_data.c			\
+		src/amazed.c			\
+		src/store_data.c	\
 		src/algo.c	\
 		src/linked_list.c	\
 		src/node.c	\

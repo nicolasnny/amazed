@@ -9,5 +9,5 @@
 
 int main(void)
 {
-    return file_valid();
+    return amazed();
 }
