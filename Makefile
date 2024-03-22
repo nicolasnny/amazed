@@ -5,7 +5,15 @@
 ## Makefile for miniprintd
 ##
 
+CC	=	gcc
+
 SRC	=	src/main.c	\
+		src/algo.c	\
+		src/linked_list.c	\
+		src/node.c	\
+		src/clean.c	\
+
+UT_SRC	=	tests/unit_tests.c	\
 		src/algo.c	\
 		src/linked_list.c	\
 		src/node.c	\
@@ -15,11 +23,15 @@ OBJ	=	$(SRC:.c=.o)
 
 NAME	=	amazed
 
+UT_BIN	=	unit_tests
+
 CPPFLAGS	=	-iquote./include
 
 CFLAGS	=	-Wall -Wextra
 
 LDFLAGS =	-L./lib/my
+
+UT_FLAGS	=	--coverage -lcriterion
 
 LDLIBS	=	-lmy
 
@@ -29,10 +41,12 @@ CS_CLEAN = *.log
 
 CS_REPORT = coding-style-reports.log
 
-all:	$(NAME)
+all:	lib $(NAME)
+
+lib:
+	$(MAKE) -C lib/my
 
 $(NAME):	$(OBJ)
-	$(MAKE) -C lib/my
 	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) $(LDLIBS)
 
 clean:
@@ -61,6 +75,10 @@ coding_style:	fclean
 	cat $(CS_REPORT)
 	make fclean  > /dev/null 2>&1
 
-.PHONY: all clean fclean re valgrind asan coding_style	gdb
+tests_run:	fclean lib
+	$(CC) -I include/ -L ./lib/my -o $(UT_BIN) $(UT_SRC) $(UT_FLAGS) -lmy
+	./$(UT_BIN)
+
+.PHONY: all clean fclean re valgrind asan coding_style	gdb tests_run lib
 
 .SILENT: coding_style

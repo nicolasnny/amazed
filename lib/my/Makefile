@@ -6,6 +6,8 @@
 ## It should perform the following actions:
 ##
 
+CC	=	gcc
+
 SRC	=	my_char_not_in_str.c		\
 		my_print_str_array.c		\
 		my_strdup.c					\
