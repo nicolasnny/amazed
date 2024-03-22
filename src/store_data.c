@@ -23,12 +23,13 @@ static void fill_matrix(int **map, int matrix_size)
 
 static int get_room_nb(linked_list_t *node_list)
 {
+    linked_list_t *temp = node_list;
     int res = 0;
 
-    while (node_list) {
-        if (node_list->node->id > res)
-            res = node_list->node->id;
-        node_list = node_list->next;
+    while (temp) {
+        if (temp->node->id > res)
+            res = temp->node->id;
+        temp = temp->next;
     }
     return res;
 }
