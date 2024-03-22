@@ -35,8 +35,9 @@ linked_list_t *get_rooms(char **array)
     linked_list_t *rooms = NULL;
 
     for (int i = 1; array[i]; i++) {
-        if (array[i][0] != '#' && !my_char_in_str('-', array[i]))
+        if (array[i][0] != '#' && !my_char_in_str('-', array[i])) {
             rooms = insert_room(rooms, array[i]);
+        }
     }
     return rooms;
 }

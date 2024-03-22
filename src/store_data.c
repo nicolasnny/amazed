@@ -53,8 +53,8 @@ static int store_data(char **buffer, linked_list_t *node_list, int **map)
         link = my_str_to_word_array(buffer[i], "-");
         if (link[1] == NULL)
             return ERROR;
-        id_left = name2id(link[0], node_list) - 1;
-        id_right = name2id(link[1], node_list) - 1;
+        id_left = name2id(link[0], node_list);
+        id_right = name2id(link[1], node_list);
         map[id_left][id_right] = 1;
         map[id_right][id_left] = 1;
     }
@@ -63,7 +63,7 @@ static int store_data(char **buffer, linked_list_t *node_list, int **map)
 
 int **init_map(char **buffer, linked_list_t *node_list)
 {
-    int maxtrix_size = get_room_nb(node_list);
+    int maxtrix_size = get_room_nb(node_list) + 1;
     int **map = NULL;
 
     if (maxtrix_size == -1)
@@ -75,11 +75,5 @@ int **init_map(char **buffer, linked_list_t *node_list)
     fill_matrix(map, maxtrix_size);
     if (store_data(buffer, node_list, map) == ERROR)
         return NULL;
-    for (int y = 0; map[y] != NULL; y++) {
-        for (int x = 0; map[y][x] != -1; x++) {
-            printf("%d", map[y][x]);
-        }
-        printf("\n");
-    }
     return map;
 }

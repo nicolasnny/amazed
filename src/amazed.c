@@ -18,7 +18,7 @@ static char **get_input(void)
 
     if (read(STDIN_FILENO, buf, BUFSIZ) == -1)
         return NULL;
-    line_array = get_valid_part(buf);
+    line_array = my_str_to_word_array(buf, "\n");
     return line_array;
 }
 
@@ -32,5 +32,6 @@ int amazed(void)
         return ERROR;
     rooms = get_rooms(data);
     connections = get_connections(data);
+    init_map(connections, rooms);
     return SUCCESS;
 }
