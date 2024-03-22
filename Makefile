@@ -6,6 +6,8 @@
 ##
 
 SRC	=	src/error_handling.c	\
+		src/get_data.c			\
+		src/amazed.c			\
 		src/main.c
 
 OBJ	=	$(SRC:.c=.o)

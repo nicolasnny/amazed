@@ -7,10 +7,10 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "../include/my.h"
-#include "../include/amazed.h"
+#include "my.h"
+#include "amazed.h"
 
 int main(void)
 {
-    return file_valid();
+    return amazed();
 }
