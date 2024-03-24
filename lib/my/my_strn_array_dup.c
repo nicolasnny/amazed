@@ -10,15 +10,10 @@
 
 char **my_strn_array_dup(int n, char **array)
 {
-    char **array_cpy = malloc(sizeof(char *) * (my_strstrlen(array) + 1 - n));
-    int index = 0;
+    char **array_cpy = malloc(sizeof(char *) * (n + 1));
 
-    for (int i = 0; array[i]; i++) {
-        if (i >= n) {
-            array_cpy[index] = my_strdup(array[i]);
-            index++;
-        }
-    }
-    array_cpy[my_strstrlen(array) - n] = NULL;
+    for (int i = 0; array[i] && i != n; i++)
+        array_cpy[i] = my_strdup(array[i]);
+    array_cpy[n] = NULL;
     return array_cpy;
 }

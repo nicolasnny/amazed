@@ -15,10 +15,11 @@ static char **get_input(void)
 {
     char buf[BUFSIZ] = {0};
     char **line_array;
+    char *seps = my_strdup("\n");
 
     if (read(STDIN_FILENO, buf, BUFSIZ) == -1)
         return NULL;
-    line_array = my_str_to_word_array(buf, "\n");
+    line_array = my_str_to_word_array(buf, seps);
     return get_valid_part(line_array);
 }
 

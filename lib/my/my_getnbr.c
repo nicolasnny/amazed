@@ -44,6 +44,15 @@ static bool valid_number(char const *str)
     return true;
 }
 
+static int check_nb_adding(char c, int nb)
+{
+    if (c >= '0' && c <= '9' && ovf(nb, c) == 0){
+        nb *= 10;
+        nb += c - 48;
+    }
+    return nb;
+}
+
 int my_getnbr(char const *str)
 {
     int nb = 0;
@@ -55,14 +64,13 @@ int my_getnbr(char const *str)
     for (int i = 0; str[i] != '\0'; i++){
         if (str[i] >= '0' && str[i] <= '9' && ovf(nb, str[i]) == 1)
             return 0;
-        if (str[i] >= '0' && str[i] <= '9' && ovf(nb, str[i]) == 0){
-            nb *= 10;
-            nb += str[i] - 48;
-        }
+        nb = check_nb_adding(str[i], nb);
         tp = str[i];
-        if (str[i - 1] >= 48 && str[i - 1] <= 57 && ((tp < 48) || (tp > 57)))
+        if (i > 0 && str[i - 1] >= 48 && str[i - 1] <= 57 &&
+            ((tp < 48) || (tp > 57)))
             return nb * sign;
-        if (tp >= 48 && tp <= 57 && ((str[i - 1] == 45) || (str[i - 1] == 43)))
+        if (i > 0 && tp >= 48 && tp <= 57 && ((str[i - 1] == 45) ||
+            (str[i - 1] == 43)))
             sign = check_sign(i, str);
     }
     return nb * sign;
