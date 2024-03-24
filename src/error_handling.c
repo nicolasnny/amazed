@@ -118,7 +118,6 @@ static int get_nb_valid_lines(char **line_array)
             !is_a_command(line_array, end_of_rooms, i) &&
                 !is_a_connection(line_array,
                     &end_of_rooms, i)) {
-            printf("non valid line: %s\n", line_array[i]);
             return i;
         }
         start = valid_start(line_array, i, start, end_of_rooms);
