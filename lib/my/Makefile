@@ -23,6 +23,7 @@ SRC	=	my_char_not_in_str.c		\
 		my_strcmp.c					\
 		my_strlen.c 				\
 		my_getnbr.c					\
+		my_str_isnum.c				\
 		my_revstr.c					\
 		my_strcpy.c					\
 		my_strstrlen.c				\
@@ -43,10 +44,15 @@ CFLAGS	=	-Wall -Wextra
 
 HFILE	=	my.h
 
+BIN_NAME	=	amazed
+
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
 	ar rc -o $(NAME) $(OBJ)
+
+run:
+	gcc -o $(BIN_NAME) $(CFLAGS) main.c -L./ -lmy
 
 copy:
 	cp libmy.a  ../libmy.a
@@ -58,8 +64,15 @@ clean:
 fclean:	clean
 	rm -f $(NAME)
 
-debug:	CPPFLAGS += -g3
-debug:	re
+valgrind : CFLAGS += -g3
+valgrind : re
+
+asan:	CC	=	clang -fsanitize=address
+asan:	CFLAGS += -ggdb3
+asan:	re
+
+gdb: valgrind
+	gdb -ex "run" -ex "bt full" -ex "detach" -ex "quit" $(BIN_NAME)
 
 re:	fclean all
 

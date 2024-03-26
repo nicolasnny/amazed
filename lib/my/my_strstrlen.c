@@ -7,11 +7,11 @@
 
 #include <stdlib.h>
 
-int my_strstrlen(char **str)
+int my_strstrlen(char **array)
 {
     int len = 0;
 
-    while (str[len] != NULL)
+    while (array[len])
         len++;
     return len;
 }
