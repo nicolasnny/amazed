@@ -18,7 +18,8 @@ static void reset_all_node(linked_list_t *nodes)
 static void set_path_as_visited(linked_list_t *list)
 {
     while (list != NULL) {
-        list->node->visited = true;
+        if (!list->node->end && !list->node->start)
+            list->node->visited = true;
         list = list->next;
     }
 }

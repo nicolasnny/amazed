@@ -37,6 +37,7 @@ node_t *get_goal_node(linked_list_t *list);
 // --> algorithm
 linked_list_t *find_shortest_path(linked_list_t *nodes, int **link_array);
 linked_list_t *get_path(node_t *goal, node_t *root);
+void set_map_to_find_new_path(linked_list_t *nodes, linked_list_t **paths);
 
 // --> clean
 int free_queue(linked_list_t *queue);
