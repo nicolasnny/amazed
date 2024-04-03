@@ -28,7 +28,7 @@ unsigned int get_list_size(linked_list_t *list);
 void display_list_name(linked_list_t *list);
 
 // --> nodes
-node_t *get_element_in_queue(linked_list_t *queue);
+node_t *get_element_in_queue(linked_list_t **queue);
 void set_as_visited(node_t *node, node_t *parent);
 node_t *get_node_from_id(linked_list_t *list, int id);
 node_t *get_root_node(linked_list_t *list);

@@ -77,7 +77,7 @@ linked_list_t *find_shortest_path(linked_list_t *nodes,
         return NULL;
     set_as_visited(root, parent);
     while (queue != NULL && queue->node != NULL) {
-        current = get_element_in_queue(queue);
+        current = get_element_in_queue(&queue);
         if (current->id == goal->id) {
             free_queue(queue);
             return get_path(goal, root);

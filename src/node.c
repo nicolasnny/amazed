@@ -10,23 +10,27 @@
 #include <stdbool.h>
 #include "amazed.h"
 
-node_t *get_element_in_queue(linked_list_t *queue)
+node_t *get_element_in_queue(linked_list_t **queue)
 {
+    linked_list_t *start = *queue;
     linked_list_t *prev = NULL;
     node_t *node = NULL;
 
-    if (queue == NULL)
+    if (*queue == NULL)
         return NULL;
-    while (queue->next != NULL) {
-        prev = queue;
-        queue = queue->next;
+    while ((*queue)->next != NULL) {
+        prev = *queue;
+        *queue = (*queue)->next;
     }
-    node = queue->node;
-    if (prev != NULL)
+    node = (*queue)->node;
+    if (prev != NULL) {
         prev->next = NULL;
-    else
-        queue = NULL;
-    free(queue);
+        free(*queue);
+        *queue = start;
+    } else {
+        free(*queue);
+        *queue = NULL;
+    }
     return node;
 }
 
