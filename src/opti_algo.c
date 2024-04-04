@@ -6,6 +6,8 @@
 */
 
 #include <stdbool.h>
+#include <stddef.h>
+#include "struct.h"
 
 static void reset_all_node(linked_list_t *nodes)
 {
@@ -19,7 +21,7 @@ static void set_path_as_visited(linked_list_t *list)
 {
     while (list != NULL) {
         if (!list->node->end && !list->node->start)
-            list->node->visited = true;
+            list->node->checked = true;
         list = list->next;
     }
 }
