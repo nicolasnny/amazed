@@ -59,21 +59,20 @@ int amazed(void)
     link_array = init_map(connections, rooms);
     path = find_shortest_path(rooms, link_array);
     display_list_name(path);
-    path_list = append_path(path_list, path);
     set_map_to_find_new_path(rooms, path_list);
-    display_list_name(rooms);
-    printf("test\n");
     while (path) {
-        printf("in this loop\n");
-        path = find_shortest_path(rooms, link_array);
         path_list = append_path(path_list, path);
+        path = find_shortest_path(rooms, link_array);
+        display_list_name(path);
         set_map_to_find_new_path(rooms, path_list);
     }
     path_list = spread_robots(rooms, path_list, data);
     path_list_t *temp = path_list;
     int i = 1;
     while (temp) {
-        printf("path n°%d robots:\n", i);
+        printf("path: \n");
+        display_list_name(temp->path);
+        printf("; robots:\n");
         disp_robots(temp->robots);
         i++;
         temp = temp->next;
