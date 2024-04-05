@@ -30,13 +30,15 @@ void set_map_to_find_new_path(linked_list_t *nodes, path_list_t *paths)
 {
     path_list_t *temp;
 
-    if (!paths)
+    if (!paths || !nodes)
         return;
     temp = paths;
     reset_all_node(nodes);
-    display_list_name(nodes);
     while (temp) {
+        //display_list_name(nodes);
+        //printf("reseting path\n");
         set_path_as_visited(temp->path);
+        //display_list_name(nodes);
         temp = temp->next;
     }
 }

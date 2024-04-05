@@ -66,7 +66,7 @@ int amazed(void)
     while (path) {
         printf("in this loop\n");
         path = find_shortest_path(rooms, link_array);
-        append_path(path_list, path);
+        path_list = append_path(path_list, path);
         set_map_to_find_new_path(rooms, path_list);
     }
     path_list = spread_robots(rooms, path_list, data);
