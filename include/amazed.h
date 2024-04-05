@@ -56,5 +56,6 @@ path_list_t *spread_robots(linked_list_t *rooms, path_list_t *paths,
     char **data);
 path_list_t *get_path_list(char **data, linked_list_t *rooms,
     int **link_array);
+void disp_robots(path_list_t *path_list);
 
 #endif /*   A_MAZE_D    */

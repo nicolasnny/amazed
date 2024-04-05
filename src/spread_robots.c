@@ -11,6 +11,18 @@
 #include "my.h"
 #include "struct.h"
 
+static unsigned int get_nb_path(path_list_t *path_list)
+{
+    path_list_t *temp = path_list;
+    unsigned int i = 0;
+
+    while (temp) {
+        i++;
+        temp = temp->next;
+    }
+    return i;
+}
+
 static path_list_t *append_path(path_list_t *path_list, linked_list_t *path)
 {
     path_list_t *new_path_list = malloc(sizeof(path_list_t));
@@ -114,14 +126,13 @@ path_list_t *get_path_list(char **data, linked_list_t *rooms, int **link_array)
 {
     linked_list_t *path = NULL;
     path_list_t *path_list = NULL;
+    unsigned int robot_nb = my_getnbr(data[0]);
 
     path = find_shortest_path(rooms, link_array);
-    display_list_name(path);
-    while (path) {
+    while (path && get_nb_path(path_list) < robot_nb) {
         path_list = append_path(path_list, path);
         set_map_to_find_new_path(rooms, path_list);
         path = find_shortest_path(rooms, link_array);
-        display_list_name(path);
     }
     path_list = spread_robots(rooms, path_list, data);
     return path_list;
