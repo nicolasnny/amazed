@@ -20,7 +20,7 @@ int start_sim(linked_list_t *robot_list)
         analyse_key(key, &over, &move_robots);
         if (move_robots)
             go_to_next_step(); //n + 1 on the algorithm
-        display_robots();
+        display_robots(robot_list);
     }
     endwin();
 }

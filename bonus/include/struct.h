@@ -23,4 +23,10 @@ typedef struct linked_list_s {
     struct linked_list_s *next;
 } linked_list_t;
 
+enum room_type {
+    Start,
+    Middle,
+    End
+};
+
 #endif /*   STRUCT_H    */

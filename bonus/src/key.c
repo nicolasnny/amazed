@@ -7,10 +7,11 @@
 
 #include <stdbool.h>
 #include <ncurses.h>
+#include "amazed.h"
 
 void analyse_key(int key, bool *over, bool *move_robots)
 {
-    key = get_ch();
+    key = getch();
     if (key == ESCAPE) {
         *over = true;
         return;

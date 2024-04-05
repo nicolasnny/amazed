@@ -17,6 +17,9 @@ SRC	=	src/main.c	\
 		src/clean.c	\
 		src/error_handling.c	\
 		src/path.c	\
+		src/key.c	\
+		src/boxes.c	\
+		src/game_loop.c	\
 
 UT_SRC	=	tests/unit_tests.c	\
 		src/get_data.c			\
@@ -28,6 +31,7 @@ UT_SRC	=	tests/unit_tests.c	\
 		src/clean.c	\
 		src/error_handling.c	\
 		src/path.c	\
+		src/key.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

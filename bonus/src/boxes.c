@@ -6,6 +6,7 @@
 */
 
 #include <ncurses.h>
+#include <stdlib.h>
 #include "amazed.h"
 
 static void add_robot(linked_list_t **robot_list, char *line)
@@ -55,10 +56,12 @@ static char *create_ending_lines(int size)
     return line;
 }
 
-char **create_group_box(linked_list_t *robots_list)
+char **create_group_box(linked_list_t *robots_list, enum room_type room)
 {
+    robot_list_t *room_list = NULL;
+    add_robot_to_list(robots_list, &room_list, room);
     int max_size = (COLS - 15) / 3;
-    int robot_nb = get_list_size(robots_list);
+    int robot_nb = get_list_size(room_list);
     int robots_per_line = max_size / ROBOT_CHAR_SIZE;
     char **box = malloc(sizeof(char *) * (robot_nb / robots_per_line + 3));
 
