@@ -7,7 +7,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
-#include "struct.h"
+#include "amazed.h"
 
 static void reset_all_node(linked_list_t *nodes)
 {
@@ -34,6 +34,7 @@ void set_map_to_find_new_path(linked_list_t *nodes, path_list_t *paths)
         return;
     temp = paths;
     reset_all_node(nodes);
+    display_list_name(nodes);
     while (temp) {
         set_path_as_visited(temp->path);
         temp = temp->next;

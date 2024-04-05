@@ -58,11 +58,13 @@ int amazed(void)
     connections = get_connections(data);
     link_array = init_map(connections, rooms);
     path = find_shortest_path(rooms, link_array);
-    display_list_name(path);
-    append_path(path_list, path);
+    display_list_name(path); //tmp
+    path_list = append_path(path_list, path);
     set_map_to_find_new_path(rooms, path_list);
+    display_list_name(rooms); //tmp
     printf("test\n");
     while (path) {
+        printf("in this loop\n");
         path = find_shortest_path(rooms, link_array);
         append_path(path_list, path);
         set_map_to_find_new_path(rooms, path_list);
