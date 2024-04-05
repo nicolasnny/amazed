@@ -7,27 +7,29 @@
 
 CC	=	gcc
 
-SRC	=	src/main.c	\
+SRC	=	src/main.c				\
 		src/get_data.c			\
 		src/amazed.c			\
-		src/store_data.c	\
-		src/algo.c	\
-		src/linked_list.c	\
-		src/node.c	\
-		src/clean.c	\
+		src/store_data.c		\
+		src/algo.c				\
+		src/linked_list.c		\
+		src/node.c				\
+		src/clean.c				\
 		src/error_handling.c	\
-		src/path.c	\
+		src/spread_robots.c		\
+		src/opti_algo.c			\
+		src/path.c
 
-UT_SRC	=	tests/unit_tests.c	\
-		src/get_data.c			\
-		src/amazed.c			\
-		src/store_data.c	\
-		src/algo.c	\
-		src/linked_list.c	\
-		src/node.c	\
-		src/clean.c	\
-		src/error_handling.c	\
-		src/path.c	\
+UT_SRC	=	tests/unit_tests.c		\
+			src/get_data.c			\
+			src/amazed.c			\
+			src/store_data.c		\
+			src/algo.c				\
+			src/linked_list.c		\
+			src/node.c				\
+			src/clean.c				\
+			src/error_handling.c	\
+			src/path.c
 
 OBJ	=	$(SRC:.c=.o)
 

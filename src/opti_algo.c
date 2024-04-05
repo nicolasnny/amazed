@@ -26,11 +26,16 @@ static void set_path_as_visited(linked_list_t *list)
     }
 }
 
-void set_map_to_find_new_path(linked_list_t *nodes, linked_list_t **paths)
+void set_map_to_find_new_path(linked_list_t *nodes, path_list_t *paths)
 {
-    if (paths == NULL)
+    path_list_t *temp;
+
+    if (!paths)
         return;
+    temp = paths;
     reset_all_node(nodes);
-    for (unsigned int i = 0; paths[i] != NULL; i++)
-        set_path_as_visited(paths[i]);
+    while (temp) {
+        set_path_as_visited(temp->path);
+        temp = temp->next;
+    }
 }

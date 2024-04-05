@@ -37,7 +37,7 @@ node_t *get_goal_node(linked_list_t *list);
 // --> algorithm
 linked_list_t *find_shortest_path(linked_list_t *nodes, int **link_array);
 linked_list_t *get_path(node_t *goal, node_t *root);
-void set_map_to_find_new_path(linked_list_t *nodes, linked_list_t **paths);
+void set_map_to_find_new_path(linked_list_t *nodes, path_list_t *paths);
 
 // --> clean
 int free_queue(linked_list_t *queue);
@@ -50,5 +50,10 @@ char **get_connections(char **array);
 int amazed(void);
 char **get_valid_part(char **line_array);
 int **init_map(char **buffer, linked_list_t *node_list);
+
+// --> robot spreading
+path_list_t *spread_robots(linked_list_t *rooms, path_list_t *paths,
+    char **data);
+
 
 #endif /*   A_MAZE_D    */
