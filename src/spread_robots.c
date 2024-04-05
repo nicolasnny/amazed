@@ -11,16 +11,6 @@
 #include "my.h"
 #include "struct.h"
 
-static void disp_robots(robot_list_t *robots)
-{
-    robot_list_t *temp = robots;
-
-    while (temp) {
-        printf("\t- robot : %d\n", temp->robot->id);
-        temp = temp->next;
-    }
-}
-
 static path_list_t *append_path(path_list_t *path_list, linked_list_t *path)
 {
     path_list_t *new_path_list = malloc(sizeof(path_list_t));
