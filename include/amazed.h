@@ -54,6 +54,7 @@ int **init_map(char **buffer, linked_list_t *node_list);
 // --> robot spreading
 path_list_t *spread_robots(linked_list_t *rooms, path_list_t *paths,
     char **data);
-
+path_list_t *get_path_list(char **data, linked_list_t *rooms,
+    int **link_array);
 
 #endif /*   A_MAZE_D    */

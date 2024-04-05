@@ -11,6 +11,25 @@
 #include "my.h"
 #include "struct.h"
 
+static void disp_robots(robot_list_t *robots)
+{
+    robot_list_t *temp = robots;
+
+    while (temp) {
+        printf("\t- robot : %d\n", temp->robot->id);
+        temp = temp->next;
+    }
+}
+
+static path_list_t *append_path(path_list_t *path_list, linked_list_t *path)
+{
+    path_list_t *new_path_list = malloc(sizeof(path_list_t));
+
+    new_path_list->path = path;
+    new_path_list->next = path_list;
+    return new_path_list;
+}
+
 static int get_path_len(linked_list_t *path)
 {
     linked_list_t *temp = path;
@@ -62,10 +81,9 @@ static void place_robot(robot_t *robot, path_list_t *paths)
 
     if (!temp)
         return;
-    if (temp->path_len + get_nb_robots(temp->robots) <=
-        temp->next->path_len + get_nb_robots(temp->next->robots) ||
-        !temp->next) {
-            add_robot(temp->robots, robot);
+    if (!temp->next || temp->path_len + get_nb_robots(temp->robots) <
+        temp->next->path_len + get_nb_robots(temp->next->robots)) {
+            temp->robots = add_robot(temp->robots, robot);
             return;
     } else
         place_robot(robot, temp->next);
@@ -100,4 +118,21 @@ path_list_t *spread_robots(linked_list_t *rooms,
     }
     robot_list[robot_nb] = NULL;
     return set_rooms(robot_list, paths);
+}
+
+path_list_t *get_path_list(char **data, linked_list_t *rooms, int **link_array)
+{
+    linked_list_t *path = NULL;
+    path_list_t *path_list = NULL;
+
+    path = find_shortest_path(rooms, link_array);
+    display_list_name(path);
+    while (path) {
+        path_list = append_path(path_list, path);
+        set_map_to_find_new_path(rooms, path_list);
+        path = find_shortest_path(rooms, link_array);
+        display_list_name(path);
+    }
+    path_list = spread_robots(rooms, path_list, data);
+    return path_list;
 }
