@@ -77,8 +77,8 @@ static path_list_t *set_rooms(robot_t **robot_list, path_list_t *paths)
 
     while (temp) {
         temp->robots = NULL;
-        temp = temp->next;
         temp->path_len = get_path_len(temp->path);
+        temp = temp->next;
     }
     for (unsigned int i = 0; robot_list[i]; i++) {
         place_robot(robot_list[i], paths);

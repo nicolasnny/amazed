@@ -76,6 +76,7 @@ int amazed(void)
         printf("path n°%d robots:\n", i);
         disp_robots(temp->robots);
         i++;
+        temp = temp->next;
     }
     return SUCCESS;
 }
