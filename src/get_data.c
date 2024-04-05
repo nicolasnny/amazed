@@ -27,8 +27,7 @@ static linked_list_t *insert_room(linked_list_t *rooms, char **array, int i)
         new_node->node->start = true;
     if (my_strcmp(array[i - 1], "##end") == 0)
         new_node->node->end = true;
-    if (rooms)
-        new_node->next = rooms;
+    new_node->next = rooms;
     new_node->node->checked = false;
     return new_node;
 }
