@@ -58,4 +58,8 @@ path_list_t *get_path_list(char **data, linked_list_t *rooms,
     int **link_array);
 void disp_robots(path_list_t *path_list);
 
+// --> help prompt
+int disp_help(void);
+
+
 #endif /*   A_MAZE_D    */

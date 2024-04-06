@@ -6,8 +6,11 @@
 */
 
 #include "amazed.h"
+#include "my.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
+    if (argc == 2 && my_strcmp(argv[1], "-h") == 0)
+        return disp_help();
     return amazed();
 }
