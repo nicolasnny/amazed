@@ -58,4 +58,8 @@ path_list_t *get_path_list(char **data, linked_list_t *rooms,
     int **link_array);
 void disp_robots(path_list_t *path_list);
 
+// --> output
+void print_basic_output(linked_list_t *rooms, char **data, char **connections);
+char *id2name(int id, linked_list_t *node_list);
+
 #endif /*   A_MAZE_D    */

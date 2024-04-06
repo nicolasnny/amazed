@@ -18,7 +18,8 @@ SRC	=	src/main.c				\
 		src/error_handling.c	\
 		src/spread_robots.c		\
 		src/opti_algo.c			\
-		src/path.c
+		src/path.c				\
+		src/output.c			\
 
 UT_SRC	=	tests/unit_tests.c		\
 			src/get_data.c			\
