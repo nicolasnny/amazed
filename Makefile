@@ -87,10 +87,6 @@ asan:	re
 gdb: valgrind
 	gdb -ex "run" -ex "bt full" -ex "detach" -ex "quit" $(NAME)
 
-tests_run:	fclean re
-	gcc -o $(UT_BIN) $(UT_SRC) -I include/ -L . -lhashtable $(UT_FLAGS)
-	./$(UT_BIN)
-
 coding_style:	fclean
 	coding-style . . > /dev/null 2>&1
 	cat $(CS_REPORT)
