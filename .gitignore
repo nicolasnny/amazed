@@ -18,3 +18,5 @@ output
 lib/my/libmy.a
 vgcore*
 test
+file
+.vscode*
