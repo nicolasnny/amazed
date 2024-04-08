@@ -19,6 +19,7 @@ static void set_node_content(linked_list_t *new_node, char **content_array)
     new_node->node->name = my_strdup(content_array[0]);
     new_node->node->x = my_getnbr(content_array[1]);
     new_node->node->y = my_getnbr(content_array[2]);
+    new_node->node->is_occupied = false;
     free_str_array(content_array);
     id++;
 }

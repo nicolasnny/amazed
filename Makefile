@@ -21,6 +21,7 @@ SRC	=	src/main.c				\
 		src/opti_algo.c			\
 		src/path.c				\
 		src/output.c			\
+		src/robots_move.c		\
 
 UT_SRC	=	tests/unit_tests.c		\
 			src/get_data.c			\

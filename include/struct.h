@@ -15,6 +15,7 @@ typedef struct node_s {
     int id;
     char *name;
     bool checked;
+    bool is_occupied;
     bool start;
     bool end;
     int x;

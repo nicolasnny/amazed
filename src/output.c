@@ -41,7 +41,8 @@ static void print_rooms_reverse(linked_list_t *rooms)
         rooms->node->y);
 }
 
-void print_basic_output(linked_list_t *rooms, char **data, char **connections)
+void print_basic_output
+(linked_list_t *rooms, char **data, char **connections, path_list_t *path_list)
 {
     linked_list_t *rooms_cpy = rooms;
 
@@ -52,4 +53,5 @@ void print_basic_output(linked_list_t *rooms, char **data, char **connections)
     rooms_cpy = rooms;
     print_connections(connections);
     mini_printf("#moves\n");
+    move_robots(path_list);
 }

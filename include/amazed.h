@@ -63,7 +63,8 @@ int disp_help(void);
 
 
 // --> output
-void print_basic_output(linked_list_t *rooms, char **data, char **connections);
+void print_basic_output(linked_list_t *rooms, char **data, char **connections, path_list_t *path_list);
 char *id2name(int id, linked_list_t *node_list);
+void move_robots(path_list_t *path_list);
 
 #endif /*   A_MAZE_D    */
