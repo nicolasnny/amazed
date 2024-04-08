@@ -42,6 +42,8 @@ typedef struct path_list_s {
 typedef struct robot_s {
     int id;
     node_t *room;
+    linked_list_t *path;
+    linked_list_t *next_room;
 } robot_t;
 
 #endif /*   STRUCT_H    */

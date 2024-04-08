@@ -37,7 +37,8 @@ static void print_rooms_reverse(linked_list_t *rooms)
             mini_printf("##start\n");
     if (rooms->node->end)
         mini_printf("##end\n");
-    mini_printf("%s %d %d\n", rooms->node->name, rooms->node->x, rooms->node->y);
+    mini_printf("%s %d %d\n", rooms->node->name, rooms->node->x,
+        rooms->node->y);
 }
 
 void print_basic_output(linked_list_t *rooms, char **data, char **connections)

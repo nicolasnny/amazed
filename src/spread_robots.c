@@ -68,12 +68,15 @@ static node_t *get_start_room(linked_list_t *rooms)
     return NULL;
 }
 
-static robot_list_t *add_robot(robot_list_t *robot_list, robot_t *robot)
+static robot_list_t *add_robot(robot_list_t *robot_list, robot_t *robot,
+    linked_list_t *path)
 {
     robot_list_t *new_robot_list = malloc(sizeof(robot_list_t));
 
     new_robot_list->robot = robot;
     new_robot_list->next = robot_list;
+    new_robot_list->robot->path = path;
+    new_robot_list->robot->next_room = path;
     return new_robot_list;
 }
 
@@ -85,7 +88,7 @@ static void place_robot(robot_t *robot, path_list_t *paths)
         return;
     if (!temp->next || temp->path_len + get_nb_robots(temp->robots) <
         temp->next->path_len + get_nb_robots(temp->next->robots)) {
-            temp->robots = add_robot(temp->robots, robot);
+            temp->robots = add_robot(temp->robots, robot, temp->path);
             return;
     } else
         place_robot(robot, temp->next);
