@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include "amazed.h"
 
-static int set_node_content(linked_list_t *new_node, char **content_array)
+static void set_node_content(linked_list_t *new_node, char **content_array)
 {
     static int id = 0;
 
@@ -28,8 +28,7 @@ static linked_list_t *insert_room(linked_list_t *rooms, char **array, int i)
     linked_list_t *new_node = malloc(sizeof(linked_list_t));
     char **content_array = my_str_to_word_array(array[i], " \t");
 
-    if (set_node_content(new_node, content_array) == ERROR)
-        return NULL;
+    set_node_content(new_node, content_array);
     new_node->node->start = false;
     new_node->node->end = false;
     if (my_strcmp(array[i - 1], "##start") == 0)
