@@ -17,6 +17,8 @@ typedef struct node_s {
     bool checked;
     bool start;
     bool end;
+    int x;
+    int y;
     struct node_s *parent;
 } node_t;
 

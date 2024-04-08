@@ -60,7 +60,7 @@ int my_getnbr(char const *str)
     char tp;
 
     if (!valid_number(str))
-        return 0;
+        return -1;
     for (int i = 0; str[i] != '\0'; i++){
         if (str[i] >= '0' && str[i] <= '9' && ovf(nb, str[i]) == 1)
             return 0;
