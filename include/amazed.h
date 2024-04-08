@@ -58,6 +58,10 @@ path_list_t *get_path_list(char **data, linked_list_t *rooms,
     int **link_array);
 void disp_robots(path_list_t *path_list);
 
+// --> help prompt
+int disp_help(void);
+
+
 // --> output
 void print_basic_output(linked_list_t *rooms, char **data, char **connections);
 char *id2name(int id, linked_list_t *node_list);

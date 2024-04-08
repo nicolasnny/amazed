@@ -16,6 +16,7 @@ SRC	=	src/main.c				\
 		src/node.c				\
 		src/clean.c				\
 		src/error_handling.c	\
+		src/help.c				\
 		src/spread_robots.c		\
 		src/opti_algo.c			\
 		src/path.c				\
