@@ -8,9 +8,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "../include/amazed.h"
-#include "../include/my.h"
-#include "../include/struct.h"
+#include "amazed.h"
 
 static linked_list_t *insert_room(linked_list_t *rooms, char **array, int i)
 {
@@ -29,10 +27,8 @@ static linked_list_t *insert_room(linked_list_t *rooms, char **array, int i)
         new_node->node->start = true;
     if (my_strcmp(array[i - 1], "##end") == 0)
         new_node->node->end = true;
-    if (rooms)
-        new_node->next = rooms;
-    else
-        new_node->next = NULL;
+    new_node->next = rooms;
+    new_node->node->checked = false;
     return new_node;
 }
 

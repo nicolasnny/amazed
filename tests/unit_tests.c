@@ -20,7 +20,7 @@ void redirect_all_stdout(void)
 
 Test(unit_test, add_to_queue)
 {
-    linked_list_t queue;
+    linked_list_t *queue = malloc(sizeof(linked_list_t));
     node_t node = {0};
 
     cr_assert_eq(add_to_queue(&queue, &node), SUCCESS);

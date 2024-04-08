@@ -8,6 +8,8 @@
 
 #ifndef MY_H
     #define MY_H
+    #define OUT -1
+    #define IN 1
     #include <stdbool.h>
 
 int my_putchar(char);
@@ -29,6 +31,7 @@ int mini_printf(char const *format, ...);
 char *my_strdup(char *src);
 char **my_str_array_dup(char **array);
 char **my_str_array_cpy(char **array, char **array_cpy);
+bool my_str_isnum(char const *str);
 void print_str_array(char **array);
 void free_str_array(char **array);
 int my_strncmp_banned_char(char const *s1, char const *s2, int n,

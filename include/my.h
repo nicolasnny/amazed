@@ -40,5 +40,6 @@ char *my_str_from_char(char c);
 void my_free_n_str(int nb_of_str, ...);
 char **my_strn_array_dup(int n, char **array);
 int find_str(char const *s1, char const *s2);
+bool my_str_isnum(char const *str);
 
 #endif /*MY_H*/

@@ -71,10 +71,12 @@ static bool new_line(char **args, int *index, int *i, int nb_col, char *buf)
     args[index[0]][index[1]] = '\0';
     index[1] = 0;
     index[0]++;
-    args[index[0]] = malloc(sizeof(char) * nb_col + 1);
+    args[index[0]] = malloc(sizeof(char) * nb_col + 10);
     if (buf[(*i) + 1] != '\0')
         (*i)++;
     check_comment(buf, i);
+    if (!in_delim(buf[*i], " "))
+        return true;
     return false;
 }
 

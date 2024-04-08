@@ -92,7 +92,7 @@ int **init_map(char **buffer, linked_list_t *node_list)
     int maxtrix_size = get_room_nb(node_list) + 1;
     int **map = NULL;
 
-    if (maxtrix_size == -1)
+    if (maxtrix_size == SYS_ERROR)
         return NULL;
     map = malloc(sizeof(int *) * (maxtrix_size + 1));
     if (map == NULL)
@@ -102,4 +102,30 @@ int **init_map(char **buffer, linked_list_t *node_list)
     if (store_data(buffer, node_list, map) == ERROR)
         return NULL;
     return map;
+}
+
+static unsigned int my_intintlen(int **array)
+{
+    unsigned int size = 0;
+
+    if (array == NULL)
+        return size;
+    while (array[size] != NULL)
+        size++;
+    return size;
+}
+
+unsigned int get_links_nb(int **link_array, node_t *node)
+{
+    unsigned int link_nb = 0;
+
+    if (node == NULL || link_array == NULL)
+        return 0;
+    if (node->id >= (int)my_intintlen(link_array))
+        return 0;
+    for (unsigned int x = 0; link_array[node->id][x] != END_ARRAY; x++) {
+        if (link_array[node->id][x] == LINK)
+            link_nb++;
+    }
+    return link_nb;
 }
