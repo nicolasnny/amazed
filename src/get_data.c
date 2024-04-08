@@ -13,8 +13,6 @@
 static int set_node_content(linked_list_t *new_node, char **content_array)
 {
     static int id = 0;
-    int x;
-    int y;
 
     new_node->node = malloc(sizeof(node_t));
     new_node->node->id = id;
