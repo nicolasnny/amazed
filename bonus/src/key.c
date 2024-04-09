@@ -9,14 +9,14 @@
 #include <ncurses.h>
 #include "amazed.h"
 
-void analyse_key(int key, bool *over, bool *move_robots)
+void analyse_key(int *key, bool *over, bool *move_robots)
 {
-    key = getch();
-    if (key == ESCAPE) {
+    *key = getch();
+    if (*key == ESCAPE) {
         *over = true;
         return;
     }
-    if (key == SPACE) {
+    if (*key == SPACE) {
         if (*move_robots == true)
             *move_robots = false;
         else

@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "amazed.h"
 #include "struct.h"
 #include "my.h"
@@ -23,18 +24,61 @@ static char **get_input(void)
     return get_valid_part(line_array);
 }
 
+void disp_robots(path_list_t *path_list)
+{
+    path_list_t *temp = path_list;
+    int i = 1;
+    robot_list_t *temp_robots;
+
+    while (temp) {
+        mini_printf("path n°%d:\n\t", i);
+        display_list_name(temp->path);
+        mini_printf("\nrobots:\n");
+        temp_robots = temp->robots;
+        while (temp_robots) {
+            mini_printf("\t-id = %d\n", temp_robots->robot->id);
+            temp_robots = temp_robots->next;
+        }
+        i++;
+        temp = temp->next;
+    }
+}
+
 int amazed(void)
 {
     char **data = get_input();
     linked_list_t *rooms = NULL;
     char **connections = NULL;
     int **link_array = NULL;
+    path_list_t *path_list = NULL;
 
     if (!data)
         return ERROR;
     rooms = get_rooms(data);
     connections = get_connections(data);
     link_array = init_map(connections, rooms);
-    find_shortest_path(rooms, link_array);
+    path_list = get_path_list(data, rooms, link_array);
+    if (path_list != NULL)
+        print_basic_output(rooms, data, connections, path_list);
     return SUCCESS;
+}
+
+int ncurse_amazed(void)
+{
+    char **data = get_input();
+    linked_list_t *rooms = NULL;
+    char **connections = NULL;
+    int **link_array = NULL;
+    path_list_t *path_list = NULL;
+
+    if (!data)
+        return ERROR;
+    rooms = get_rooms(data);
+    connections = get_connections(data);
+    link_array = init_map(connections, rooms);
+    path_list = get_path_list(data, rooms, link_array);
+    if (path_list != NULL)
+        start_sim(path_list);
+    return SUCCESS;
+
 }

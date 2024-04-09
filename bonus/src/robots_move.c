@@ -1,31 +1,15 @@
 /*
 ** EPITECH PROJECT, 2024
-** 	AMAZED
+** robots_moves
 ** File description:
-** Main for ncurse
+** all functions related to robots moovement
 */
 
-#include <stdbool.h>
-#include <ncurses.h>
-#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "amazed.h"
-
-static bool timer(float sec)
-{
-    static int first = 0;
-    static clock_t start = 0;
-    clock_t current = 0;
-
-    current = clock();
-    if (first)
-        start = clock();
-    first = 1;
-    if ((current - start) / CLOCKS_PER_SEC >= sec) {
-        start = clock();
-        return true;
-    }
-    return false;
-}
+#include "my.h"
+#include "struct.h"
 
 static bool check_one_path(path_list_t *path_list)
 {
@@ -67,37 +51,23 @@ static void recursive_move(robot_list_t *robots)
         robots->robot->next_room->node->is_occupied = true;
         robots->robot->room = robots->robot->next_room->node;
         robots->robot->next_room = robots->robot->next_room->next;
+        mini_printf("P%d-%s ", robots->robot->id + 1,
+            robots->robot->room->name);
     }
 }
 
-static void go_to_next_step(path_list_t *path_list)
+void move_robots(path_list_t *path_list)
 {
     path_list_t *path_list_cpy = path_list;
 
     if (path_list == NULL)
         return;
-    while (path_list_cpy != NULL && !game_finished(path_list_cpy)) {
+    while (!game_finished(path_list_cpy)) {
         recursive_move(path_list_cpy->robots);
-        path_list_cpy = path_list_cpy->next;
+        if (path_list_cpy->next == NULL) {
+            path_list_cpy = path_list;
+            printf("\n");
+        } else
+            path_list_cpy = path_list_cpy->next;
     }
-}
-
-int start_sim(path_list_t *path_list)
-{
-    bool over = false;
-    int key = 0;
-    bool move_robots = true;
-    robot_list_t *robot_list = get_robot_list(path_list);
-
-    initscr();
-    cbreak();
-    while (!over) {
-        analyse_key(&key, &over, &move_robots);
-        if (move_robots && timer(SEC_BEFORE_MOVE))
-            go_to_next_step(path_list); //n + 1 on the algorithm
-        printf("key: %d\n", key);
-        display_robots(robot_list);
-    }
-    endwin();
-    return SUCCESS;
 }

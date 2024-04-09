@@ -7,31 +7,37 @@
 
 CC	=	gcc
 
-SRC	=	src/main.c	\
+SRC	=	src/main.c				\
 		src/get_data.c			\
 		src/amazed.c			\
-		src/store_data.c	\
-		src/algo.c	\
-		src/linked_list.c	\
-		src/node.c	\
-		src/clean.c	\
+		src/store_data.c		\
+		src/algo.c				\
+		src/linked_list.c		\
+		src/node.c				\
+		src/clean.c				\
 		src/error_handling.c	\
-		src/path.c	\
-		src/key.c	\
-		src/boxes.c	\
+		src/help.c				\
+		src/spread_robots.c		\
+		src/opti_algo.c			\
+		src/path.c				\
+		src/output.c			\
+		src/robots_move.c		\
+		src/robots_list.c	\
 		src/game_loop.c	\
-
-UT_SRC	=	tests/unit_tests.c	\
-		src/get_data.c			\
-		src/amazed.c			\
-		src/store_data.c	\
-		src/algo.c	\
-		src/linked_list.c	\
-		src/node.c	\
-		src/clean.c	\
-		src/error_handling.c	\
-		src/path.c	\
 		src/key.c	\
+		src/display.c	\
+		src/boxes.c	\
+
+UT_SRC	=	tests/unit_tests.c		\
+			src/get_data.c			\
+			src/amazed.c			\
+			src/store_data.c		\
+			src/algo.c				\
+			src/linked_list.c		\
+			src/node.c				\
+			src/clean.c				\
+			src/error_handling.c	\
+			src/path.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -47,7 +53,7 @@ LDFLAGS =	-L./lib/my
 
 UT_FLAGS	=	--coverage -lcriterion
 
-LDLIBS	=	-lmy
+LDLIBS	=	-lmy -lncurses
 
 LIBNAME	=	libmy.a
 
@@ -87,10 +93,6 @@ asan:	re
 
 gdb: valgrind
 	gdb -ex "run" -ex "bt full" -ex "detach" -ex "quit" $(NAME)
-
-tests_run:	fclean re
-	gcc -o $(UT_BIN) $(UT_SRC) -I include/ -L . -lhashtable $(UT_FLAGS)
-	./$(UT_BIN)
 
 coding_style:	fclean
 	coding-style . . > /dev/null 2>&1

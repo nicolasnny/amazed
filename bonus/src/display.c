@@ -6,6 +6,8 @@
 */
 
 #include <ncurses.h>
+#include <stdlib.h>
+#include <string.h>
 #include "amazed.h"
 
 static void get_height_and_width(char **map, int *height, int *width)
@@ -44,27 +46,27 @@ static void display_map(char **map, int cols_before)
     }
 }
 
-static void add_robot(linked_list_t **list, robot_t *robot)
+static void add_robot(robot_list_t **list, robot_t *robot)
 {
-    linked_list_t *element = malloc(sizeof(linked_list_t));
+    robot_list_t *element = malloc(sizeof(robot_list_t));
 
     element->next = *list;
     element->robot = robot;
     *list = element;
 }
 
-static robot_list_t *add_robot_to_list(robot_list_t *robot_list, robot_list_t **new_list, enum room_type room)
+void add_robot_to_list(robot_list_t *robot_list,
+    robot_list_t **new_list, enum room_type room)
 {
     while (robot_list != NULL) {
         if (room == Start && robot_list->robot->room->start)
             add_robot(new_list, robot_list->robot);
         if (room == End && robot_list->robot->room->start)
             add_robot(new_list, robot_list->robot);
-        if (!room == Start && !room == End)
+        if (room != Start && room != End)
             add_robot(new_list, robot_list->robot);
         robot_list = robot_list->next;
     }
-    return new_list;
 }
 
 void display_robots(robot_list_t *robots_list)
@@ -74,9 +76,9 @@ void display_robots(robot_list_t *robots_list)
     char **end_room = create_group_box(robots_list, End);
     int cols_before = 0;
 
-    display_map(map, cols_before);
+    display_map(start_room, cols_before);
     cols_before += strlen(start_room[0]) + 2;
-    display_map(map, 2);
+    display_map(middle_room, 2);
     cols_before += strlen(middle_room[0]) + 2;
-    display_map(map, 3);
+    display_map(end_room, 3);
 }
