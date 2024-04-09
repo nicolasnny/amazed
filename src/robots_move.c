@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "amazed.h"
 #include "my.h"
 #include "struct.h"
@@ -51,8 +52,12 @@ static void recursive_move(robot_list_t *robots)
         robots->robot->next_room->node->is_occupied = true;
         robots->robot->room = robots->robot->next_room->node;
         robots->robot->next_room = robots->robot->next_room->next;
-        mini_printf("P%d-%s ", robots->robot->id + 1,
-            robots->robot->room->name);
+        write(1, "P", 1);
+        my_put_nbr(robots->robot->id + 1);
+        write(1, "-", 1);
+        write(1, robots->robot->room->name,
+            my_strlen(robots->robot->room->name));
+        write(1, " ", 1);
     }
 }
 
@@ -66,7 +71,7 @@ void move_robots(path_list_t *path_list)
         recursive_move(path_list_cpy->robots);
         if (path_list_cpy->next == NULL) {
             path_list_cpy = path_list;
-            printf("\n");
+            write(1, "\n", 1);
         } else
             path_list_cpy = path_list_cpy->next;
     }
