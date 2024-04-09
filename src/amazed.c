@@ -56,6 +56,8 @@ int amazed(void)
         return ERROR;
     rooms = get_rooms(data);
     connections = get_connections(data);
+    if (!rooms || !connections)
+        return ERROR;
     link_array = init_map(connections, rooms);
     path_list = get_path_list(data, rooms, link_array);
     print_basic_output(rooms, data, connections, path_list);
