@@ -41,6 +41,31 @@ static linked_list_t *insert_room(linked_list_t *rooms, char **array, int i)
     return new_node;
 }
 
+static bool count_name(linked_list_t *rooms, char *name)
+{
+    linked_list_t *temp = rooms;
+    int i = 0;
+
+    while (temp) {
+        if (my_strcmp(temp->node->name, name) == 0)
+            i++;
+        temp = temp->next;
+    }
+    return i;
+}
+
+static bool room_name_unique(linked_list_t *rooms)
+{
+    linked_list_t *temp = rooms;
+
+    while (temp) {
+        if (count_name(rooms, temp->node->name) != 1)
+            return false;
+        temp = temp->next;
+    }
+    return true;
+}
+
 linked_list_t *get_rooms(char **array)
 {
     linked_list_t *rooms = NULL;
@@ -50,6 +75,8 @@ linked_list_t *get_rooms(char **array)
             rooms = insert_room(rooms, array, i);
         }
     }
+    if (!room_name_unique(rooms))
+        return NULL;
     return rooms;
 }
 
