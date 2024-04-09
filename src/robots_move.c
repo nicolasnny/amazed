@@ -52,8 +52,12 @@ static void recursive_move(robot_list_t *robots)
         robots->robot->next_room->node->is_occupied = true;
         robots->robot->room = robots->robot->next_room->node;
         robots->robot->next_room = robots->robot->next_room->next;
-        mini_printf("P%d-%s ", robots->robot->id + 1,
-            robots->robot->room->name);
+        write(1, "P", 1);
+        my_put_nbr(robots->robot->id + 1);
+        write(1, "-", 1);
+        write(1, robots->robot->room->name,
+            my_strlen(robots->robot->room->name));
+        write(1, " ", 1);
     }
 }
 
