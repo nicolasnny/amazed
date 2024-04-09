@@ -85,6 +85,5 @@ linked_list_t *find_shortest_path(linked_list_t *nodes,
         check_compatibilities(nodes, &queue, link_array, current);
     }
     free_queue(queue);
-    my_putstr_err("Error: didn't find any valid path from root to target\n");
     return NULL;
 }
