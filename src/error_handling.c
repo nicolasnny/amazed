@@ -105,13 +105,18 @@ static bool valid_start(char **line_array, int i, bool start, bool end_of_room)
     return true;
 }
 
+static bool single_name_defined(char **line_array)
+{
+    return true;
+}
+
 static int get_nb_valid_lines(char **line_array)
 {
     bool end_of_rooms = false;
     bool start = false;
     bool end = false;
 
-    if (!valid_robot_quantity(line_array))
+    if (!valid_robot_quantity(line_array) || !single_name_defined(line_array))
         return 0;
     for (int i = 1; line_array[i]; i++) {
         if (!is_a_room(line_array, end_of_rooms, i) &&

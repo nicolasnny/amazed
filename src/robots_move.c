@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "amazed.h"
 #include "my.h"
 #include "struct.h"
@@ -66,7 +67,7 @@ void move_robots(path_list_t *path_list)
         recursive_move(path_list_cpy->robots);
         if (path_list_cpy->next == NULL) {
             path_list_cpy = path_list;
-            printf("\n");
+            write(1, "\n", 1);
         } else
             path_list_cpy = path_list_cpy->next;
     }
