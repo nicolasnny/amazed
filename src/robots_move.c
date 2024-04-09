@@ -64,9 +64,10 @@ void move_robots(path_list_t *path_list)
         return;
     while (!game_finished(path_list_cpy)) {
         recursive_move(path_list_cpy->robots);
-        if (path_list_cpy->next == NULL)
+        if (path_list_cpy->next == NULL) {
             path_list_cpy = path_list;
-        else
+            printf("\n");
+        } else
             path_list_cpy = path_list_cpy->next;
     }
 }
