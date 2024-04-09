@@ -44,12 +44,15 @@ static void recursive_move(robot_list_t *robots)
     if (robots == NULL || robots->robot == NULL)
         return;
     recursive_move(robots->next);
-    if (robots->robot->next_room != NULL && (!robots->robot->next_room->node->is_occupied || robots->robot->next_room->node->end)) {
+    if (robots->robot->next_room != NULL &&
+        (!robots->robot->next_room->node->is_occupied ||
+            robots->robot->next_room->node->end)) {
         robots->robot->room->is_occupied = false;
         robots->robot->next_room->node->is_occupied = true;
         robots->robot->room = robots->robot->next_room->node;
         robots->robot->next_room = robots->robot->next_room->next;
-        mini_printf("P%d-%s ", robots->robot->id + 1, robots->robot->room->name);
+        mini_printf("P%d-%s ", robots->robot->id + 1,
+            robots->robot->room->name);
     }
 }
 
