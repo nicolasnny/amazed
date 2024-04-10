@@ -66,12 +66,12 @@ void check_comment(char *buf, int *i)
     }
 }
 
-static bool skip_delim(char *buf, int *i)
+static bool skip_delim(char *buf, int *i, char *delim)
 {
     if (buf[(*i) + 1] != '\0')
         (*i)++;
     check_comment(buf, i);
-    if (!in_delim(buf[*i], " "))
+    if (!in_delim(buf[*i], delim))
         return true;
     return false;
 }
@@ -95,12 +95,16 @@ static int *init_index(void)
 
 static char **finish_str_array(int *index, char **args)
 {
+    char **final_array = NULL;
+
     if (index[1] > 0) {
         args[index[0]][index[1]] = '\0';
         index[0]++;
     }
     args[index[0]] = NULL;
-    return args;
+    final_array = my_str_array_dup_ban_str(args, "\n");
+    free_str_array(args);
+    return final_array;
 }
 
 static void add_char(char **args, int *index, char new_char)
@@ -123,7 +127,7 @@ char **my_str_to_word_array(char *buf, char *delim)
             add_line = true;
         if (buf[i] != '\0' && in_delim(buf[i], delim) && add_line) {
             new_line(args, index, nb_col);
-            add_line = skip_delim(buf, &i);
+            add_line = skip_delim(buf, &i, delim);
         }
         if (buf[i] != '\0' && !in_delim(buf[i], delim))
             add_char(args, index, buf[i]);
