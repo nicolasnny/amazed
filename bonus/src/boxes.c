@@ -9,6 +9,17 @@
 #include <stdlib.h>
 #include "amazed.h"
 
+static int get_robot_list_size(robot_list_t *list)
+{
+    int size = 0;
+
+    while (list != NULL) {
+        size++;
+        list = list->next;
+    }
+    return size;
+}
+
 static void add_robot(robot_list_t **robot_list, char *line)
 {
     char *name = NULL;
@@ -20,23 +31,26 @@ static void add_robot(robot_list_t **robot_list, char *line)
         *robot_list = (*robot_list)->next;
     }
     line[0] = 'P';
-    for (int i = 1; i < 4; i++) {
+    for (int i = 1; i < ROBOT_CHAR_SIZE; i++) {
         if (i < nsize - 1)
             line[i] = name[i - 1];
         else
             line[i] = ' ';
     }
-    line[4] = ' ';
+    line[ROBOT_CHAR_SIZE] = ' ';
 }
 
-static char *create_new_line(robot_list_t *robot_list, int size)
+static char *create_new_line(robot_list_t **robot_list, int size)
 {
     char *line = malloc(sizeof(char) * (size + 1));
     unsigned int col = 0;
 
     line[col] = '|';
     while ((int)col < size - 1) {
-        add_robot(&robot_list, line + col);
+        if (get_robot_list_size(*robot_list) != 0)
+            add_robot(robot_list, line + col);
+        for (int i = 0; i < ROBOT_CHAR_SIZE; i++)
+            line[col + i] = ' ';
         col += ROBOT_CHAR_SIZE;
     }
     line[col] = '|';
@@ -56,17 +70,6 @@ static char *create_ending_lines(int size)
     return line;
 }
 
-static int get_robot_list_size(robot_list_t *list)
-{
-    int size = 0;
-
-    while (list != NULL) {
-        size++;
-        list = list->next;
-    }
-    return size;
-}
-
 char **create_group_box(robot_list_t *robots_list, enum room_type room)
 {
     robot_list_t *room_list = NULL;
@@ -74,12 +77,19 @@ char **create_group_box(robot_list_t *robots_list, enum room_type room)
     int max_size = (COLS - 15) / 3;
     int robot_nb = get_robot_list_size(room_list);
     int robots_per_line = max_size / ROBOT_CHAR_SIZE;
-    char **box = malloc(sizeof(char *) * (robot_nb / robots_per_line + 3));
+    char **box = malloc(sizeof(char *) * (LINES * 0.8 + 1));
+    int rb_remains = get_robot_list_size(robots_list);
 
+    dprintf(2, "room(%d)->robots on line: %d | malloc size: %d\n", (int)room, robot_nb, robot_nb / robots_per_line + 3);
     box[0] = create_ending_lines(robots_per_line * ROBOT_CHAR_SIZE + 2);
     for (int line = 1; line < robot_nb / robots_per_line - 1; line++) {
-        box[line] = create_new_line(robots_list, robots_per_line * ROBOT_CHAR_SIZE + 2);
+        if (rb_remains >= robots_per_line)
+            box[line] = create_new_line(&robots_list, max_size + my_strlen("||"));
+        rb_remains = get_robot_list_size(robots_list);
     }
-    box[robot_nb / robots_per_line + 2] = create_ending_lines(robots_per_line * ROBOT_CHAR_SIZE + 2);
+    if (rb_remains != 0)
+        dprintf(2, "Error: there shouldn't be any robot remaining at this point\n");
+    box[LINES * 0.8 - 1] = create_ending_lines(robots_per_line * ROBOT_CHAR_SIZE + 2);
+    box[LINES * 0.8] = NULL;
     return box;
 }

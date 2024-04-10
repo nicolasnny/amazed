@@ -85,18 +85,16 @@ static void go_to_next_step(path_list_t *path_list)
 int start_sim(path_list_t *path_list)
 {
     bool over = false;
-    int key = 0;
     bool move_robots = true;
     robot_list_t *robot_list = get_robot_list(path_list);
 
     initscr();
-    cbreak();
     while (!over) {
-        analyse_key(&key, &over, &move_robots);
+        clear();
         if (move_robots && timer(SEC_BEFORE_MOVE))
-            go_to_next_step(path_list); //n + 1 on the algorithm
-        printf("key: %d\n", key);
+            go_to_next_step(path_list);
         display_robots(robot_list);
+        refresh();
     }
     endwin();
     return SUCCESS;

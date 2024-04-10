@@ -9,8 +9,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "amazed.h"
-#include "struct.h"
-#include "my.h"
 
 static char **get_input(void)
 {
@@ -80,5 +78,4 @@ int ncurse_amazed(void)
     if (path_list != NULL)
         start_sim(path_list);
     return SUCCESS;
-
 }

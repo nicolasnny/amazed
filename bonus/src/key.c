@@ -9,17 +9,23 @@
 #include <ncurses.h>
 #include "amazed.h"
 
-void analyse_key(int *key, bool *over, bool *move_robots)
+int analyse_key(int key, bool *over, bool *move_robots)
 {
-    *key = getch();
-    if (*key == ESCAPE) {
+    /*if (key == -1)
+        perror("getch");
+        dprintf(2, "key in func: %d\n", key);*/
+    if (key == ESCAPE) {
         *over = true;
-        return;
+        dprintf(2, "in escape\n");
+        return key;
     }
-    if (*key == SPACE) {
+    if (key == SPACE) {
+        dprintf(2, "in space\n");
         if (*move_robots == true)
             *move_robots = false;
         else
             *move_robots = true;
+        return key;
     }
+    return key;
 }

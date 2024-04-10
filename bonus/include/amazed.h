@@ -75,7 +75,7 @@ void move_robots(path_list_t *path_list);
 int ncurse_amazed(void);
 robot_list_t *get_robot_list(path_list_t *path_list);
 int start_sim(path_list_t *path_list);
-void analyse_key(int *key, bool *over, bool *move_robots);
+int analyse_key(int key, bool *over, bool *move_robots);
 void display_robots(robot_list_t *robot_list);
 char **create_group_box(robot_list_t *robot_list, enum room_type room);
 void add_robot_to_list(robot_list_t *robot_list,
