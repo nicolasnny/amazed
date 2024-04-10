@@ -91,8 +91,8 @@ int start_sim(path_list_t *path_list)
     initscr();
     while (!over) {
         clear();
-        if (move_robots && timer(SEC_BEFORE_MOVE))
-            go_to_next_step(path_list);
+        //if (move_robots && timer(SEC_BEFORE_MOVE))
+        //    go_to_next_step(path_list);
         display_robots(robot_list);
         refresh();
     }

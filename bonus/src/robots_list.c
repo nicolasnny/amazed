@@ -5,16 +5,25 @@
 ** Functions related to robot lists
 */
 
+#include <stdlib.h>
 #include <stddef.h>
 #include "amazed.h"
 
-static void append_path_robots(robot_list_t *robots, robot_list_t *robot_path)
+static void add_robot_to_path(robot_list_t **list, robot_t *robot)
 {
-    if (robots == NULL)
-        return;
-    while (robots->next != NULL)
-        robots = robots->next;
-    robots->next = robot_path;
+    robot_list_t *element = malloc(sizeof(robot_list_t));
+
+    element->robot = robot;
+    element->next = *list;
+    *list = element;
+}
+
+static void add_all_robots(robot_list_t **robots, robot_list_t *path_list)
+{
+    while (path_list != NULL) {
+        add_robot_to_path(robots, path_list->robot);
+        path_list = path_list->next;
+    }
 }
 
 robot_list_t *get_robot_list(path_list_t *path_list)
@@ -22,7 +31,7 @@ robot_list_t *get_robot_list(path_list_t *path_list)
     robot_list_t *robots = NULL;
 
     while (path_list != NULL) {
-        append_path_robots(robots, path_list->robots);
+        add_all_robots(&robots, path_list->robots);
         path_list = path_list->next;
     }
     return robots;

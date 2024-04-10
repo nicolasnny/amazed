@@ -40,7 +40,7 @@ static void display_map(char **map, int cols_before)
     } else {
         dprintf(2, "height: %d\n", height);
         while (map[line] != NULL) {
-            move(LINES / 2 - height / 2 + line, cols_before * 30 + 1); //tmp
+            move(LINES / 2 - height / 2 + line, cols_before + 1); //tmp
             printw("%s\n", map[line]);
             line++;
         }
@@ -59,13 +59,19 @@ static void add_robot(robot_list_t **list, robot_t *robot)
 void add_robot_to_list(robot_list_t *robot_list,
     robot_list_t **new_list, enum room_type room)
 {
+    dprintf(2, "before running in list\n");
     while (robot_list != NULL) {
-        if (room == Start && robot_list->robot->room->start)
+        dprintf(2, "list is not null\n");
+        if (room == Start && robot_list->robot->room->start) {
             add_robot(new_list, robot_list->robot);
-        if (room == End && robot_list->robot->room->start)
+            dprintf(2, "adding robot\n");
+        }
+        if (room == End && robot_list->robot->room->start) {
             add_robot(new_list, robot_list->robot);
-        if (room != Start && room != End)
+        }
+        if (room != Start && room != End) {
             add_robot(new_list, robot_list->robot);
+        }
         robot_list = robot_list->next;
     }
 }
@@ -78,9 +84,9 @@ void display_robots(robot_list_t *robots_list)
     int cols_before = 0;
 
     display_map(start_room, cols_before);
-    cols_before += strlen(start_room[0]) + 2;
-    display_map(middle_room, 2);
-    cols_before += strlen(middle_room[0]) + 2;
-    display_map(end_room, 3);
-    dprintf(2, "Trying to display the map\n");
+    cols_before += (COLS - 15) / 3 + 2;
+    display_map(middle_room, cols_before);
+    cols_before = (COLS - 15) / 3 * 2 + 2 * 2;
+    display_map(end_room, cols_before);
+    //rintf(2, "Trying to display the map\n");
 }
