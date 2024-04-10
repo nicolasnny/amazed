@@ -21,6 +21,9 @@ static char **get_input(void)
     if (read(STDIN_FILENO, buf, BUFSIZ) == SYS_ERROR)
         return NULL;
     line_array = my_str_to_word_array(buf, seps);
+    if (!line_array[0])
+        return NULL;
+    print_str_array(line_array);
     return get_valid_part(line_array);
 }
 
