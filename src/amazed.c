@@ -24,24 +24,34 @@ static char **get_input(void)
     return get_valid_part(line_array);
 }
 
+static int start_algo(linked_list_t *rooms, char **connections, char **data)
+{
+    int **link_array = NULL;
+    path_list_t *path_list = NULL;
+
+    link_array = init_map(connections, rooms);
+    path_list = get_path_list(data, rooms, link_array);
+    if (!path_list) {
+        print_str_array(data);
+        return ERROR;
+    }
+    print_basic_output(rooms, data, connections, path_list);
+    return SUCCESS;
+}
+
 int amazed(void)
 {
     char **data = get_input();
     linked_list_t *rooms = NULL;
     char **connections = NULL;
-    int **link_array = NULL;
-    path_list_t *path_list = NULL;
 
     if (!data)
         return ERROR;
     rooms = get_rooms(data);
     connections = get_connections(data);
-    if (!rooms || !connections[0])
+    if (!rooms || !connections[0]) {
+        print_str_array(data);
         return ERROR;
-    link_array = init_map(connections, rooms);
-    path_list = get_path_list(data, rooms, link_array);
-    if (!path_list)
-        return ERROR;
-    print_basic_output(rooms, data, connections, path_list);
-    return SUCCESS;
+    }
+    return start_algo(rooms, connections, data);
 }
