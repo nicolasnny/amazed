@@ -25,6 +25,7 @@ static void get_height_and_width(char **map, int *height, int *width)
     }
     *width = m_col;
     *height = line;
+    dprintf(2, "Hieght not normal: %d\n", *height);
 }
 
 static void display_map(char **map, int cols_before)

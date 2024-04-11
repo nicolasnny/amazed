@@ -27,6 +27,23 @@ static bool timer(float sec)
     return false;
 }
 
+static bool timer2(float sec)
+{
+    static int first = 1;
+    static time_t start = 0;
+    time_t current = 0;
+
+    time(&current);
+    if (first)
+        time(&start);
+    first = 0;
+    if ((current - start) >= sec) {
+        time(&start);
+        return true;
+    }
+    return false;
+}
+
 static bool check_one_path(path_list_t *path_list)
 {
     if (path_list == NULL)
@@ -95,7 +112,8 @@ int start_sim(path_list_t *path_list)
             go_to_next_step(path_list);
         }
         display_robots(robot_list);
-        refresh();
+        if (timer2(0.35))
+            refresh();
     }
     endwin();
     return SUCCESS;
