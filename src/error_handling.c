@@ -131,7 +131,10 @@ static int get_nb_valid_lines(char **line_array)
 char **get_valid_part(char **line_array)
 {
     int nb_valid_lines = get_nb_valid_lines(line_array);
-    char **valid_array = my_strn_array_dup(nb_valid_lines, line_array);
+    char **valid_array;
 
+    if (nb_valid_lines == 0)
+        return NULL;
+    valid_array = my_strn_array_dup(nb_valid_lines, line_array);
     return valid_array;
 }

@@ -18,30 +18,10 @@ static char **get_input(void)
     char **line_array;
     char *seps = my_strdup("\n");
 
-    if (read(STDIN_FILENO, buf, BUFSIZ) == -1)
+    if (read(STDIN_FILENO, buf, BUFSIZ) == SYS_ERROR)
         return NULL;
     line_array = my_str_to_word_array(buf, seps);
     return get_valid_part(line_array);
-}
-
-void disp_robots(path_list_t *path_list)
-{
-    path_list_t *temp = path_list;
-    int i = 1;
-    robot_list_t *temp_robots;
-
-    while (temp) {
-        mini_printf("path n°%d:\n\t", i);
-        display_list_name(temp->path);
-        mini_printf("\nrobots:\n");
-        temp_robots = temp->robots;
-        while (temp_robots) {
-            mini_printf("\t-id = %d\n", temp_robots->robot->id);
-            temp_robots = temp_robots->next;
-        }
-        i++;
-        temp = temp->next;
-    }
 }
 
 int amazed(void)
@@ -56,9 +36,12 @@ int amazed(void)
         return ERROR;
     rooms = get_rooms(data);
     connections = get_connections(data);
+    if (!rooms || !connections[0])
+        return ERROR;
     link_array = init_map(connections, rooms);
     path_list = get_path_list(data, rooms, link_array);
-    if (path_list != NULL)
-        print_basic_output(rooms, data, connections, path_list);
+    if (!path_list)
+        return ERROR;
+    print_basic_output(rooms, data, connections, path_list);
     return SUCCESS;
 }

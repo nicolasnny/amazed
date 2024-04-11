@@ -12,5 +12,7 @@ int main(int argc, char **argv)
 {
     if (argc == 2 && my_strcmp(argv[1], "-h") == 0)
         return disp_help();
+    if (argc != 1)
+        return ERROR;
     return amazed();
 }

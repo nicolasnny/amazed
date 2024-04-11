@@ -24,6 +24,7 @@ char *my_revstr(char *str);
 char *my_strstr(char *str, char const *to_find);
 int my_strcmp(char const *s1, char const *s2);
 int my_strncmp(char const *s1, char const *s2, int n);
+char **my_str_array_dup_ban_str(char **array, char *str);
 char *my_strcat(char *dest, char const *src);
 int my_strstrlen(char **str);
 char **my_str_to_word_array(char *str_buf, char *delim);
@@ -43,5 +44,6 @@ char *my_str_from_char(char c);
 void my_free_n_str(int nb_of_str, ...);
 char **my_strn_array_dup(int n, char **array);
 int find_str(char const *s1, char const *s2);
+int my_put_nbr(int nb);
 
 #endif /*MY_H*/
