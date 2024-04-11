@@ -59,17 +59,15 @@ static void add_robot(robot_list_t **list, robot_t *robot)
 void add_robot_to_list(robot_list_t *robot_list,
     robot_list_t **new_list, enum room_type room)
 {
-    dprintf(2, "before running in list\n");
     while (robot_list != NULL) {
-        dprintf(2, "list is not null\n");
         if (room == Start && robot_list->robot->room->start) {
             add_robot(new_list, robot_list->robot);
-            dprintf(2, "adding robot\n");
         }
-        if (room == End && robot_list->robot->room->start) {
+        if (room == End && robot_list->robot->room->end) {
             add_robot(new_list, robot_list->robot);
         }
-        if (room != Start && room != End) {
+        if (room != Start && room != End &&
+            !robot_list->robot->room->end && !robot_list->robot->room->start) {
             add_robot(new_list, robot_list->robot);
         }
         robot_list = robot_list->next;
@@ -88,5 +86,4 @@ void display_robots(robot_list_t *robots_list)
     display_map(middle_room, cols_before);
     cols_before = (COLS - 15) / 3 * 2 + 2 * 2;
     display_map(end_room, cols_before);
-    //rintf(2, "Trying to display the map\n");
 }

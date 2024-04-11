@@ -85,7 +85,7 @@ static void go_to_next_step(path_list_t *path_list)
 int start_sim(path_list_t *path_list)
 {
     bool over = false;
-    bool move_robots = true;
+    //bool move_robots = true;
     robot_list_t *robot_list = get_robot_list(path_list);
 
     initscr();
