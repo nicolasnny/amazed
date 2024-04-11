@@ -79,18 +79,14 @@ static char *create_ending_lines(int size)
 char **create_group_box(robot_list_t *robots_list, enum room_type room)
 {
     robot_list_t *room_list = NULL;
-    add_robot_to_list(robots_list, &room_list, room);
     int max_size = (COLS - 15) / 3;
     char **box = malloc(sizeof(char *) * (LINES * 0.8 + 1));
-    int rb_remains = get_robot_list_size(robots_list);
 
+    add_robot_to_list(robots_list, &room_list, room);
     box[0] = create_ending_lines(max_size + 2);
     for (int line = 1; line < LINES * 0.8 - 1; line++) {
         box[line] = create_new_line(&room_list, max_size + my_strlen("||"));
-        rb_remains = get_robot_list_size(room_list);
     }
-    if (rb_remains != 0)
-        dprintf(2, "Error: there shouldn't be any robot remaining at this point\n");
     box[(int)(LINES * 0.8) - 1] = create_ending_lines(max_size + 2);
     box[(int)(LINES * 0.8)] = NULL;
     return box;

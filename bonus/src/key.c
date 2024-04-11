@@ -11,9 +11,6 @@
 
 int analyse_key(int key, bool *over, bool *move_robots)
 {
-    /*if (key == -1)
-        perror("getch");
-        dprintf(2, "key in func: %d\n", key);*/
     if (key == ESCAPE) {
         *over = true;
         dprintf(2, "in escape\n");

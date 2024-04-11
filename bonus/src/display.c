@@ -39,7 +39,7 @@ static void display_map(char **map, int cols_before)
         printw("Please resize the terminal\n");
     } else {
         while (map[line] != NULL) {
-            move(LINES / 2 - height / 2 + line, cols_before + 1); //tmp
+            move(LINES / 2 - height / 2 + line, cols_before + 1);
             printw("%s\n", map[line]);
             line++;
         }

@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2024
-** 	AMAZED
+** AMAZED
 ** File description:
-** Main for ncurse
+** Func for the bonus llop
 */
 
 #include <stdbool.h>
