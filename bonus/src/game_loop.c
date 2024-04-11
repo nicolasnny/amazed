@@ -12,16 +12,16 @@
 
 static bool timer(float sec)
 {
-    static int first = 0;
-    static clock_t start = 0;
-    clock_t current = 0;
+    static int first = 1;
+    static time_t start = 0;
+    time_t current = 0;
 
-    current = clock();
+    time(&current);
     if (first)
-        start = clock();
-    first = 1;
-    if ((current - start) / CLOCKS_PER_SEC >= sec) {
-        start = clock();
+        time(&start);
+    first = 0;
+    if ((current - start) >= sec) {
+        time(&start);
         return true;
     }
     return false;
@@ -85,14 +85,15 @@ static void go_to_next_step(path_list_t *path_list)
 int start_sim(path_list_t *path_list)
 {
     bool over = false;
-    //bool move_robots = true;
+    bool move_robots = true;
     robot_list_t *robot_list = get_robot_list(path_list);
 
     initscr();
     while (!over) {
         clear();
-        //if (move_robots && timer(SEC_BEFORE_MOVE))
-        //    go_to_next_step(path_list);
+        if (move_robots && timer(SEC_BEFORE_MOVE)){
+            go_to_next_step(path_list);
+        }
         display_robots(robot_list);
         refresh();
     }
