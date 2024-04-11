@@ -40,6 +40,22 @@ static void add_robot(robot_list_t **robot_list, char *line)
     line[ROBOT_CHAR_SIZE] = ' ';
 }
 
+static void line_assist(robot_list_t **robot_list, int size,
+    unsigned int *col, char *line)
+{
+    while ((int)*col < size - 1) {
+        if (get_robot_list_size(*robot_list) != 0
+            && (int)*col + ROBOT_CHAR_SIZE < size - 1) {
+            add_robot(robot_list, line + *col);
+            *col += ROBOT_CHAR_SIZE;
+        }
+        for (int i = 0; (int)*col < size - 1 && i < ROBOT_CHAR_SIZE; i++) {
+            line[*col] = ' ';
+            *col += 1;
+        }
+    }
+}
+
 static char *create_new_line(robot_list_t **robot_list, int size)
 {
     char *line = malloc(sizeof(char) * (size + 1));
@@ -49,17 +65,7 @@ static char *create_new_line(robot_list_t **robot_list, int size)
         line[i] = ' ';
     line[col] = '|';
     col++;
-    while ((int)col < size - 1) {
-        if (get_robot_list_size(*robot_list) != 0
-            && (int)col + ROBOT_CHAR_SIZE < size - 1) {
-            add_robot(robot_list, line + col);
-            col += ROBOT_CHAR_SIZE;
-        }
-        for (int i = 0; (int)col < size - 1 && i < ROBOT_CHAR_SIZE; i++) {
-            line[col] = ' ';
-            col++;
-        }
-    }
+    line_assist(robot_list, size, &col, line);
     line[col] = '|';
     line[col + 1] = '\0';
     return line;
