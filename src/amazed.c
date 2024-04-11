@@ -12,21 +12,6 @@
 #include "struct.h"
 #include "my.h"
 
-static char **get_inputtt(void)
-{
-    char buf[BUFSIZ] = {0};
-    char **line_array;
-    char *seps = my_strdup("\n");
-
-    if (read(STDIN_FILENO, buf, BUFSIZ) == SYS_ERROR)
-        return NULL;
-    line_array = my_str_to_word_array(buf, seps);
-    if (!line_array[0])
-        return NULL;
-    print_str_array(line_array);
-    return get_valid_part(line_array);
-}
-
 static input_t *new_node_input(void)
 {
     input_t *input = malloc(sizeof(input_t));
@@ -48,24 +33,34 @@ static int input_size(input_t *input)
     return res;
 }
 
+static int get_line_size(char **buffer, size_t *buffer_size)
+{
+    int line_size = getline(buffer, buffer_size, stdin);
+
+    if (line_size == 1)
+        return 0;
+    return line_size;
+}
+
 static input_t *retrieve_input(void)
 {
     input_t *input_og = new_node_input();
     input_t *input = input_og;
+    input_t *save_node = NULL;
     __ssize_t line_size = 0;
     size_t buffer_size = 0;
     char *buffer = NULL;
 
     while (line_size != -1) {
-        line_size = getline(&buffer, &buffer_size, stdin);
-        if (line_size == 1)
-            line_size = 0;
+        line_size = get_line_size(&buffer, &buffer_size);
         if (line_size != -1) {
+            buffer[line_size - 1] = '\0';
             input->buffer = my_strdup_banned_chars(buffer, "\n");
             input->next = new_node_input();
+            save_node = input;
             input = input->next;
         } else
-            input = NULL;
+            save_node->next = NULL;
     }
     return input_og;
 }
@@ -75,14 +70,12 @@ static char **get_input(void)
     input_t *input = retrieve_input();
     int InputSize = input_size(input);
     char **res = malloc(sizeof(char *) * (InputSize + 1));
+    input_t *temp = input;
 
     res[InputSize] = NULL;
-    for (int i = 0; input != NULL && input->buffer != NULL; i++) {
-        res[i] = my_strdup(input->buffer);
-        input = input->next;
-    }
-    for (int i = 0; res[i] != NULL; i++) {
-        printf("%s\n", res[i]);
+    for (int i = 0; temp && temp->buffer != NULL; i++) {
+        res[i] = my_strdup(temp->buffer);
+        temp = temp->next;
     }
     return res;
 }

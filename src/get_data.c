@@ -17,6 +17,8 @@ static void set_node_content(linked_list_t *new_node, char **content_array)
     new_node->node = malloc(sizeof(node_t));
     new_node->node->id = id;
     new_node->node->name = my_strdup(content_array[0]);
+    if (!content_array[1] || !content_array[2])
+        return;
     new_node->node->x = my_getnbr(content_array[1]);
     new_node->node->y = my_getnbr(content_array[2]);
     new_node->node->is_occupied = false;
