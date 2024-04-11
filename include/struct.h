@@ -47,4 +47,9 @@ typedef struct robot_s {
     linked_list_t *next_room;
 } robot_t;
 
+typedef struct input_s {
+    char *buffer;
+    struct input_s *next;
+} input_t;
+
 #endif /*   STRUCT_H    */

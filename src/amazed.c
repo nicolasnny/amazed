@@ -12,7 +12,7 @@
 #include "struct.h"
 #include "my.h"
 
-static char **get_input(void)
+static char **get_inputtt(void)
 {
     char buf[BUFSIZ] = {0};
     char **line_array;
@@ -25,6 +25,66 @@ static char **get_input(void)
         return NULL;
     print_str_array(line_array);
     return get_valid_part(line_array);
+}
+
+static input_t *new_node_input(void)
+{
+    input_t *input = malloc(sizeof(input_t));
+
+    input->next = NULL;
+    input->buffer = NULL;
+    return input;
+}
+
+static int input_size(input_t *input)
+{
+    input_t *input_cpy = input;
+    int res = 0;
+
+    while (input_cpy) {
+        res += 1;
+        input_cpy = input_cpy->next;
+    }
+    return res;
+}
+
+static input_t *retrieve_input(void)
+{
+    input_t *input_og = new_node_input();
+    input_t *input = input_og;
+    __ssize_t line_size = 0;
+    size_t buffer_size = 0;
+    char *buffer = NULL;
+
+    while (line_size != -1) {
+        line_size = getline(&buffer, &buffer_size, stdin);
+        if (line_size == 1)
+            line_size = 0;
+        if (line_size != -1) {
+            input->buffer = my_strdup_banned_chars(buffer, "\n");
+            input->next = new_node_input();
+            input = input->next;
+        } else
+            input = NULL;
+    }
+    return input_og;
+}
+
+static char **get_input(void)
+{
+    input_t *input = retrieve_input();
+    int InputSize = input_size(input);
+    char **res = malloc(sizeof(char *) * (InputSize + 1));
+
+    res[InputSize] = NULL;
+    for (int i = 0; input != NULL && input->buffer != NULL; i++) {
+        res[i] = my_strdup(input->buffer);
+        input = input->next;
+    }
+    for (int i = 0; res[i] != NULL; i++) {
+        printf("%s\n", res[i]);
+    }
+    return res;
 }
 
 static int start_algo(linked_list_t *rooms, char **connections, char **data)
