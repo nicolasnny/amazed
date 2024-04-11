@@ -56,11 +56,12 @@ path_list_t *spread_robots(linked_list_t *rooms, path_list_t *paths,
     char **data);
 path_list_t *get_path_list(char **data, linked_list_t *rooms,
     int **link_array);
-void disp_robots(path_list_t *path_list);
 
 // --> help prompt
 int disp_help(void);
 
+int get_nb_valid_lines(char **line_array);
+bool valid_robot_quantity(char **array);
 
 // --> output
 void print_basic_output(linked_list_t *rooms, char **data,

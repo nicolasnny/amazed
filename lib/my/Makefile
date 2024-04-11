@@ -30,6 +30,7 @@ SRC	=	my_char_not_in_str.c		\
 		my_str_to_word_array.c		\
 		my_free_n_str.c				\
 		my_str_array_dup_ban_str.c	\
+		my_str_array_cmp.c			\
 		my_str_from_char.c			\
 		my_strn_array_dup.c			\
 		mini_printf.c				\

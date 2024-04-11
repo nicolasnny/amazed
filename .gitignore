@@ -4,7 +4,6 @@ main.c
 *.~
 coding-style-reports.log
 a.out
-tests/
 tester/
 amazed
 unit_tests*

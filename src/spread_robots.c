@@ -137,7 +137,7 @@ path_list_t *get_path_list(char **data, linked_list_t *rooms, int **link_array)
         set_map_to_find_new_path(rooms, path_list);
         path = find_shortest_path(rooms, link_array);
     }
-    if (path_list == NULL) {
+    if (!path_list) {
         my_putstr_err("Error: path not found\n");
         return NULL;
     }

@@ -39,8 +39,10 @@ static bool is_a_connection(char **line_array, bool *end_of_room, int i)
 {
     char **connection_array = my_str_to_word_array(line_array[i], "-");
 
-    if (my_strstrlen(connection_array) != 2)
+    if (my_strstrlen(connection_array) != 2) {
+        free_str_array(connection_array);
         return false;
+    }
     for (int i = 0; connection_array[i]; i++) {
         if (!check_valid_room(line_array, connection_array[i])) {
             free_str_array(connection_array);
@@ -105,7 +107,7 @@ static bool valid_start(char **line_array, int i, bool start, bool end_of_room)
     return true;
 }
 
-static int get_nb_valid_lines(char **line_array)
+int get_nb_valid_lines(char **line_array)
 {
     bool end_of_rooms = false;
     bool start = false;
