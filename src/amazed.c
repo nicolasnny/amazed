@@ -53,13 +53,14 @@ static input_t *retrieve_input(void)
 
     while (line_size != -1) {
         line_size = get_line_size(&buffer, &buffer_size);
-        if (line_size != -1) {
+        if (line_size != -1 && my_strcmp(buffer, "\n") != 0) {
             buffer[line_size - 1] = '\0';
             input->buffer = my_strdup_banned_chars(buffer, "\n");
             input->next = new_node_input();
             save_node = input;
             input = input->next;
-        } else
+        }
+        if (line_size == -1 && my_strcmp(buffer, "\n") != 0)
             save_node->next = NULL;
     }
     return input_og;
