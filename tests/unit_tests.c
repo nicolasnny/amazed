@@ -155,3 +155,21 @@ Test(unit_test, print_basic_output)
 
     print_basic_output(nodes, chars, chars, path_list);
 }
+
+Test(unit_test, init_map)
+{
+    char *chars[] = {
+        "34",
+        "##start",
+        "0 1 0",
+        "##end",
+        "1 13 0",
+        "2 5 0",
+        "0-2",
+        "2-1",
+        NULL
+    };
+    linked_list_t *nodes = get_rooms(chars);
+
+    cr_assert_null(init_map(chars, nodes));
+}
