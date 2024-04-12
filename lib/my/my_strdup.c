@@ -32,7 +32,7 @@ char *my_strdup(char *src)
     int i = 0;
     char *dest = malloc(sizeof(char) * my_strlen(src) + 1);
 
-    if (!dest)
+    if (!dest || !src)
         return NULL;
     while (src[i] != '\0') {
         dest[i] = src[i];

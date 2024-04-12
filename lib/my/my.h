@@ -25,6 +25,7 @@ char *my_strstr(char *str, char const *to_find);
 int my_strcmp(char const *s1, char const *s2);
 int my_strncmp(char const *s1, char const *s2, int n);
 char **my_str_array_dup_ban_str(char **array, char *str);
+bool my_str_array_cmp(char **array1, char **array2);
 char *my_strcat(char *dest, char const *src);
 int my_strstrlen(char **str);
 char **my_str_to_word_array(char *str_buf, char *delim);

@@ -61,7 +61,7 @@ void check_comment(char *buf, int *i)
         *i >= 0 && buf[*i - 1] == '#'))
         return;
     if (buf[*i] == '#') {
-        while (buf[*i] != '\n')
+        while (buf[*i] != '\0' && buf[*i] != '\n')
             (*i)++;
     }
 }
