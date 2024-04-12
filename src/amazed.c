@@ -21,13 +21,15 @@ static input_t *new_node_input(void)
     return input;
 }
 
-static int get_line_size(char **buffer, size_t *buffer_size)
+static int get_line_size(size_t *line_size, char **buffer,
+    size_t *buffer_size)
 {
-    int line_size = getline(buffer, buffer_size, stdin);
-
-    if (line_size == 1)
+    *line_size = getline(buffer, buffer_size, stdin);
+    if (*line_size == 1)
         return 0;
-    return line_size;
+    if (*line_size == 0)
+        return 1;
+    return *line_size;
 }
 
 static input_t *retrieve_input(void)
@@ -35,22 +37,21 @@ static input_t *retrieve_input(void)
     input_t *input_og = new_node_input();
     input_t *input = input_og;
     input_t *save_node = NULL;
-    __ssize_t line_size = 0;
+    size_t line_size = 0;
     size_t buffer_size = 0;
     char *buffer = NULL;
 
-    while (line_size != -1) {
-        line_size = get_line_size(&buffer, &buffer_size);
-        if (buffer && line_size != -1 && my_strcmp(buffer, "\n") != 0) {
+    while (get_line_size(&line_size, &buffer, &buffer_size) != -1) {
+        if (buffer && my_strcmp(buffer, "\n") != 0) {
             buffer[line_size] = '\0';
             input->buffer = my_strdup(buffer);
             input->next = new_node_input();
             save_node = input;
             input = input->next;
         }
-        if (line_size == -1 && my_strcmp(buffer, "\n") != 0)
-            save_node->next = NULL;
     }
+    if ((int)line_size == -1 && save_node)
+        save_node->next = NULL;
     return input_og;
 }
 

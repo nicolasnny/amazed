@@ -13,8 +13,10 @@
 
 bool valid_robot_quantity(char **array)
 {
-    int robot_quantity = my_getnbr(array[0]);
+    int robot_quantity = 0;
 
+    if (array && array[0])
+        robot_quantity = my_getnbr(array[0]);
     if (robot_quantity <= 0)
         return false;
     return true;

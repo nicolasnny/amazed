@@ -23,8 +23,6 @@ char *my_strcat(char *str, char *to_add)
     int i_dest = 0;
     int i_str = 0;
 
-    if (!str && to_add)
-        str = my_strdup(to_add);
     if (dest_size == 0)
         return NULL;
     while (i_dest < my_strlen(str)) {
