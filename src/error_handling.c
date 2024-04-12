@@ -135,8 +135,11 @@ char **get_valid_part(char **line_array)
     int nb_valid_lines = get_nb_valid_lines(line_array);
     char **valid_array;
 
-    if (nb_valid_lines == 0)
+    if (nb_valid_lines == 0) {
+        free_str_array(line_array);
         return NULL;
+    }
     valid_array = my_strn_array_dup(nb_valid_lines, line_array);
+    free_str_array(line_array);
     return valid_array;
 }
