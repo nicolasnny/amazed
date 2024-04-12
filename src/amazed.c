@@ -54,8 +54,8 @@ static input_t *retrieve_input(void)
     while (line_size != -1) {
         line_size = get_line_size(&buffer, &buffer_size);
         if (buffer && line_size != -1 && my_strcmp(buffer, "\n") != 0) {
-            buffer[line_size - 1] = '\0';
-            input->buffer = my_strdup_banned_chars(buffer, "\n");
+            buffer[line_size] = '\0';
+            input->buffer = my_strdup(buffer);
             input->next = new_node_input();
             save_node = input;
             input = input->next;
@@ -69,17 +69,16 @@ static input_t *retrieve_input(void)
 static char **get_input(void)
 {
     input_t *input = retrieve_input();
-    int InputSize = input_size(input);
-    char **res = malloc(sizeof(char *) * (InputSize + 1));
+    char *res = "\0";
+    char **final_array = NULL;
     input_t *temp = input;
 
-    for (int i = 0; i != InputSize + 1; i++)
-        res[i] = NULL;
     for (int i = 0; temp && temp->buffer != NULL; i++) {
-        res[i] = my_strdup(temp->buffer);
+        res = my_strcat(res, temp->buffer);
         temp = temp->next;
     }
-    return res;
+    final_array = my_str_to_word_array(res, "\n");
+    return get_valid_part(final_array);
 }
 
 static int start_algo(linked_list_t *rooms, char **connections, char **data)
