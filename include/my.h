@@ -22,7 +22,7 @@ char *my_revstr(char *str);
 char *my_strstr(char *str, char const *to_find);
 int my_strcmp(char const *s1, char const *s2);
 int my_strncmp(char const *s1, char const *s2, int n);
-char *my_strcat(char *dest, char const *src);
+char *my_strcat(char *dest, char *src);
 int my_strstrlen(char **str);
 char **my_str_to_word_array(char *str_buf, char *delim);
 int mini_printf(char const *format, ...);

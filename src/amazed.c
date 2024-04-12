@@ -21,18 +21,6 @@ static input_t *new_node_input(void)
     return input;
 }
 
-static int input_size(input_t *input)
-{
-    input_t *input_cpy = input;
-    int res = 0;
-
-    while (input_cpy) {
-        res += 1;
-        input_cpy = input_cpy->next;
-    }
-    return res;
-}
-
 static int get_line_size(char **buffer, size_t *buffer_size)
 {
     int line_size = getline(buffer, buffer_size, stdin);
