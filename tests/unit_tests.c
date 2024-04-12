@@ -100,3 +100,58 @@ Test(unit_test, find_shortest_path_good_var)
 
     cr_assert_not_null(find_shortest_path(nodes, link_array));  //test with valid path
 }
+
+Test(unit_test, path_functions)
+{
+    int a1[] = {0, 0, 1, END_ARRAY};
+    int a2[] = {0, 0, 1, END_ARRAY};
+    int a3[] = {1, 1, 0, END_ARRAY};
+    int *link_array[] = {a1, a2, a3, NULL};
+    char *chars[] = {
+        "34",
+        "##start",
+        "0 1 0",
+        "##end",
+        "1 13 0",
+        "2 5 0",
+        "0-2",
+        "2-1",
+        NULL
+    };
+    linked_list_t *nodes = get_rooms(chars);
+    path_list_t *path_list = get_path_list(chars, nodes, link_array);
+    char **tarray = malloc(sizeof(char *) * 4);
+
+    for (int i = 0; i < 4; i++)
+        tarray[i] = my_strdup("tmp");
+    tarray[4] = NULL;
+}
+
+Test(unit_test, help_func)
+{
+    disp_help();
+}
+
+Test(unit_test, print_basic_output)
+{
+    int a1[] = {0, 0, 1, END_ARRAY};
+    int a2[] = {0, 0, 1, END_ARRAY};
+    int a3[] = {1, 1, 0, END_ARRAY};
+    int *link_array[] = {a1, a2, a3, NULL};
+    char *chars[] = {
+        "34",
+        "##start",
+        "0 1 0",
+        "##end",
+        "1 13 0",
+        "2 5 0",
+        "0-2",
+        "2-1",
+        NULL
+    };
+    linked_list_t *nodes = get_rooms(chars);
+    path_list_t *path_list = get_path_list(chars, nodes, link_array);
+    char **tarray = malloc(sizeof(char *) * 4);
+
+    print_basic_output(nodes, chars, chars, path_list);
+}
