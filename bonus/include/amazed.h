@@ -25,6 +25,7 @@
     #define ESCAPE 27
     #define SPACE 32
     #define ROBOT_CHAR_SIZE 7
+    #define REFRESH_TIME 0.05
 
 // --> linked list
 int add_to_queue(linked_list_t **queue, node_t *node);
@@ -72,9 +73,9 @@ char *id2name(int id, linked_list_t *node_list);
 void move_robots(path_list_t *path_list);
 
 // --> bonus
-int ncurse_amazed(void);
+int ncurse_amazed(int ac, char **av);
 robot_list_t *get_robot_list(path_list_t *path_list);
-int start_sim(path_list_t *path_list);
+int start_sim(path_list_t *path_list, double sec);
 int analyse_key(int key, bool *over, bool *move_robots);
 void display_robots(robot_list_t *robot_list);
 char **create_group_box(robot_list_t *robot_list, enum room_type room);

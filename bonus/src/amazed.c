@@ -61,7 +61,7 @@ int amazed(void)
     return SUCCESS;
 }
 
-int ncurse_amazed(void)
+int ncurse_amazed(int ac, char **av)
 {
     char **data = get_input();
     linked_list_t *rooms = NULL;
@@ -75,7 +75,9 @@ int ncurse_amazed(void)
     connections = get_connections(data);
     link_array = init_map(connections, rooms);
     path_list = get_path_list(data, rooms, link_array);
-    if (path_list != NULL)
-        start_sim(path_list);
+    if (path_list != NULL && ac == 2)
+        start_sim(path_list, SEC_BEFORE_MOVE);
+    if (path_list != NULL && ac == 3)
+        start_sim(path_list, atof(av[2]));
     return SUCCESS;
 }

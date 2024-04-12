@@ -10,7 +10,7 @@
 #include <time.h>
 #include "amazed.h"
 
-static bool timer(float sec)
+static bool timer(double sec)
 {
     static int first = 1;
     static time_t start = 0;
@@ -27,7 +27,7 @@ static bool timer(float sec)
     return false;
 }
 
-static bool timer2(float sec)
+static bool timer2(double sec)
 {
     static int first = 1;
     static time_t start = 0;
@@ -99,20 +99,23 @@ static void go_to_next_step(path_list_t *path_list)
     }
 }
 
-int start_sim(path_list_t *path_list)
+int start_sim(path_list_t *path_list, double time_before_move)
 {
     bool over = false;
-    bool move_robots = true;
     robot_list_t *robot_list = get_robot_list(path_list);
 
+    if (time_before_move <= 0) {
+        dprintf(2, "Error: invalid time before robots move\n");
+        return ERROR;
+    }
     initscr();
     while (!over) {
         clear();
-        if (move_robots && timer(SEC_BEFORE_MOVE)){
+        if (timer(time_before_move)){
             go_to_next_step(path_list);
         }
         display_robots(robot_list);
-        if (timer2(0.35))
+        if (timer2(REFRESH_TIME))
             refresh();
     }
     endwin();

@@ -21,3 +21,4 @@ test
 file
 .vscode*
 map
+bonus/lib/my/libmy.a
