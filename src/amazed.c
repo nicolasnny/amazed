@@ -53,7 +53,7 @@ static input_t *retrieve_input(void)
 
     while (line_size != -1) {
         line_size = get_line_size(&buffer, &buffer_size);
-        if (line_size != -1 && my_strcmp(buffer, "\n") != 0) {
+        if (buffer && line_size != -1 && my_strcmp(buffer, "\n") != 0) {
             buffer[line_size - 1] = '\0';
             input->buffer = my_strdup_banned_chars(buffer, "\n");
             input->next = new_node_input();
@@ -73,7 +73,8 @@ static char **get_input(void)
     char **res = malloc(sizeof(char *) * (InputSize + 1));
     input_t *temp = input;
 
-    res[InputSize] = NULL;
+    for (int i = 0; i != InputSize + 1; i++)
+        res[i] = NULL;
     for (int i = 0; temp && temp->buffer != NULL; i++) {
         res[i] = my_strdup(temp->buffer);
         temp = temp->next;

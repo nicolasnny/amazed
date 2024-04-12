@@ -44,7 +44,7 @@ OBJ	=	$(SRC:.c=.o)
 
 NAME	=	libmy.a
 
-CFLAGS	=	-Wall -Wextra
+CFLAGS	=	-Wall -Wextra -g3
 
 HFILE	=	my.h
 
