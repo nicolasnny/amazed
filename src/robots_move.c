@@ -40,13 +40,11 @@ static bool game_finished(path_list_t *path_list)
     return true;
 }
 
-static void recursive_move(robot_list_t *robots, char **buffer)
+static void recursive_move(robot_list_t *robots)
 {
-    char *str = NULL;
-
     if (robots == NULL || robots->robot == NULL)
         return;
-    recursive_move(robots->next, buffer);
+    recursive_move(robots->next);
     if (robots->robot->next_room != NULL &&
         (!robots->robot->next_room->node->is_occupied ||
             robots->robot->next_room->node->end)) {
@@ -54,31 +52,26 @@ static void recursive_move(robot_list_t *robots, char **buffer)
         robots->robot->next_room->node->is_occupied = true;
         robots->robot->room = robots->robot->next_room->node;
         robots->robot->next_room = robots->robot->next_room->next;
-        *buffer = my_strcat(*buffer, "P");
-        str = my_nb_to_str(robots->robot->id + 1);
-        *buffer = my_strcat(*buffer, str);
-        free(str);
-        *buffer = my_strcat(*buffer, "-");
-        *buffer = my_strcat(*buffer, robots->robot->room->name);
-        *buffer = my_strcat(*buffer, " ");
+        write(1, "P", 1);
+        my_put_nbr(robots->robot->id + 1);
+        write(1, "-", 1);
+        write(1, robots->robot->room->name,
+            my_strlen(robots->robot->room->name));
+        write(1, " ", 1);
     }
 }
 
 void move_robots(path_list_t *path_list)
 {
     path_list_t *path_list_cpy = path_list;
-    char *buffer = "";
-    int buf_len = 0;
 
     if (path_list == NULL)
         return;
     while (!game_finished(path_list_cpy)) {
-        recursive_move(path_list_cpy->robots, &buffer);
-        if (path_list_cpy->next == NULL && my_strlen(buffer) != 0) {
+        recursive_move(path_list_cpy->robots);
+        if (path_list_cpy->next == NULL) {
             path_list_cpy = path_list;
-            buf_len = my_strlen(buffer);
-            buffer[buf_len - 1] = '\n';
-            write(1, buffer, buf_len);
+            write(1, "\n", 1);
         } else
             path_list_cpy = path_list_cpy->next;
     }

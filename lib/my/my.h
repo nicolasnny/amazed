@@ -46,6 +46,5 @@ void my_free_n_str(int nb_of_str, ...);
 char **my_strn_array_dup(int n, char **array);
 int find_str(char const *s1, char const *s2);
 int my_put_nbr(int nb);
-char *my_nb_to_str(int nb);
 
 #endif /*MY_H*/
