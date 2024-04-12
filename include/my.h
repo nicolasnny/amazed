@@ -8,6 +8,8 @@
 
 #ifndef MY_H
     #define MY_H
+    #define OUT -1
+    #define IN 1
     #include <stdbool.h>
 
 int my_putchar(char);
@@ -22,6 +24,8 @@ char *my_revstr(char *str);
 char *my_strstr(char *str, char const *to_find);
 int my_strcmp(char const *s1, char const *s2);
 int my_strncmp(char const *s1, char const *s2, int n);
+char **my_str_array_dup_ban_str(char **array, char *str);
+bool my_str_array_cmp(char **array1, char **array2);
 char *my_strcat(char *dest, char *src);
 int my_strstrlen(char **str);
 char **my_str_to_word_array(char *str_buf, char *delim);
@@ -29,6 +33,7 @@ int mini_printf(char const *format, ...);
 char *my_strdup(char *src);
 char **my_str_array_dup(char **array);
 char **my_str_array_cpy(char **array, char **array_cpy);
+bool my_str_isnum(char const *str);
 void print_str_array(char **array);
 void free_str_array(char **array);
 int my_strncmp_banned_char(char const *s1, char const *s2, int n,
@@ -39,9 +44,8 @@ bool my_char_in_str(char c, char *str);
 char *my_str_from_char(char c);
 void my_free_n_str(int nb_of_str, ...);
 char **my_strn_array_dup(int n, char **array);
-bool my_str_array_cmp(char **array1, char **array2);
 int find_str(char const *s1, char const *s2);
-bool my_str_isnum(char const *str);
 int my_put_nbr(int nb);
+char *my_nb_to_str(int nb);
 
 #endif /*MY_H*/

@@ -38,6 +38,7 @@ SRC	=	my_char_not_in_str.c		\
 		my_putchar_err.c	\
 		find_str.c	\
 		my_put_nbr.c	\
+		my_nb_to_str.c	\
 
 
 OBJ	=	$(SRC:.c=.o)
