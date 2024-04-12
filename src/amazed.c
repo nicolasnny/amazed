@@ -68,7 +68,7 @@ static char **get_input(void)
         temp = temp->next;
     }
     final_array = my_str_to_word_array(res, "\n");
-    free(res);
+    free_input(input);
     return get_valid_part(final_array);
 }
 
