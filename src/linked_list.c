@@ -28,17 +28,3 @@ unsigned int get_list_size(linked_list_t *list)
     }
     return size;
 }
-
-void display_list_name(linked_list_t *list)
-{
-    my_putstr("NULL");
-    while (list) {
-        mini_printf(" -> %s", list->node->name);
-        if (list->node->checked)
-            mini_printf("(visited)");
-        else
-            (mini_printf("(not visited)"));
-        list = list->next;
-    }
-    my_putchar('\n');
-}
