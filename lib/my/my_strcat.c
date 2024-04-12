@@ -16,7 +16,7 @@ static int get_dest_size(char *str, char const *to_add)
     return my_strlen(str) + my_strlen(to_add);
 }
 
-char *my_strcat(char *str, char const *to_add)
+char *my_strcat(char *str, char *to_add)
 {
     int dest_size = get_dest_size(str, to_add);
     char *dest = malloc(sizeof(char) * (dest_size + 1));
