@@ -41,7 +41,7 @@ void set_map_to_find_new_path(linked_list_t *nodes, path_list_t *paths);
 
 // --> clean
 int free_queue(linked_list_t *queue);
-void main_free(linked_list_t *rooms, path_list_t *path_list);
+void main_free(linked_list_t *rooms, path_list_t *path_list, char **data);
 
 // --> links bewteen nodes
 int **init_map(char **buffer, linked_list_t *node_list);

@@ -66,8 +66,9 @@ static void free_rooms(linked_list_t *rooms)
     }
 }
 
-void main_free(linked_list_t *rooms, path_list_t *path_list)
+void main_free(linked_list_t *rooms, path_list_t *path_list, char **data)
 {
+    free_str_array(data);
     free_robots(path_list);
     free_rooms(rooms);
 }
