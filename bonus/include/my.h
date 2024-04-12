@@ -38,6 +38,7 @@ int my_strncmp_banned_char(char const *s1, char const *s2, int n,
     char banned_char);
 char *my_strdup_banned_chars(char *src, char *banned_chars);
 int my_strlen_banned_chars(char *str, char *banned_chars);
+char **my_str_array_dup_ban_str(char **array, char *str);
 bool my_char_in_str(char c, char *str);
 char *my_str_from_char(char c);
 void my_free_n_str(int nb_of_str, ...);
