@@ -73,7 +73,7 @@ linked_list_t *find_shortest_path(linked_list_t *nodes,
     node_t *current = NULL;
     node_t *parent = root;
 
-    if (init_check(&queue, nodes, root, goal) == ERROR)
+    if (init_check(&queue, nodes, root, goal) == ERROR || link_array == NULL)
         return NULL;
     set_as_visited(root, parent);
     while (queue != NULL && queue->node != NULL) {

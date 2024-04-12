@@ -59,7 +59,39 @@ Test(unit_test, find_shortest_path_with_wrong_initializers)
     int a2[] = {14, 45, END_ARRAY};
     int a3[] = {4, 45, END_ARRAY};
     int *link_array[] = {a1, a2, a3, NULL};
+    char *file_content[] = {
+        "34",
+        "##start",
+        "0 1 0",
+        "##end",
+        "1 13 1",
+        "2 5 0",
+        "3 9 0",
+        "0-2",
+        "2-3",
+        "3-1",
+        NULL
+    };
+    linked_list_t *nodes = get_rooms(file_content);
 
     cr_assert_null(find_shortest_path(NULL, link_array));
     cr_assert_null(find_shortest_path(NULL, NULL));
+    cr_assert_null(find_shortest_path(nodes, NULL));
 }
+
+/*Test()
+{
+    char *unvalid_input[] = {
+        "34",
+        "##start",
+        "0 1 0",
+        "##end",
+        "1 13 0 unvalidnoiazhdoi azoidhaiozdh #bedroom",
+        "2 5 0",
+        "3 9 0",
+        "0-2",
+        "2-3",
+        "3-1",
+        NULL
+    };
+    }*/
