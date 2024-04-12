@@ -37,5 +37,6 @@ char *my_strcat(char *str, char *to_add)
         i_str++;
     }
     dest[i_dest] = '\0';
+    free(str);
     return dest;
 }

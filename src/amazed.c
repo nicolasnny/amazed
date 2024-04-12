@@ -57,10 +57,11 @@ static input_t *retrieve_input(void)
 static char **get_input(void)
 {
     input_t *input = retrieve_input();
-    char *res = "\0";
+    char *res = malloc(sizeof(char));
     char **final_array = NULL;
     input_t *temp = input;
 
+    res[0] = '\0';
     for (int i = 0; temp && temp->buffer != NULL; i++) {
         res = my_strcat(res, temp->buffer);
         temp = temp->next;
