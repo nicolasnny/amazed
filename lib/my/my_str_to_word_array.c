@@ -103,6 +103,7 @@ static char **finish_str_array(int *index, char **args)
     }
     args[index[0]] = NULL;
     final_array = my_str_array_dup_ban_str(args, "\n");
+    free(index);
     return final_array;
 }
 
