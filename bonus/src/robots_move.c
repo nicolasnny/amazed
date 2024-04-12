@@ -66,7 +66,7 @@ void move_robots(path_list_t *path_list)
         recursive_move(path_list_cpy->robots);
         if (path_list_cpy->next == NULL) {
             path_list_cpy = path_list;
-            printf("\n");
+            mini_printf("\n");
         } else
             path_list_cpy = path_list_cpy->next;
     }
