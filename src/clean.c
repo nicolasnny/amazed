@@ -21,6 +21,17 @@ int free_queue(linked_list_t *queue)
     return SUCCESS;
 }
 
+static void free_path(linked_list_t *list)
+{
+    linked_list_t *next = NULL;
+
+    while (list != NULL) {
+        next = list->next;
+        free(list);
+        list = next;
+    }
+}
+
 static void free_robots(path_list_t *path_list)
 {
     robot_list_t *next = NULL;
@@ -36,6 +47,7 @@ static void free_robots(path_list_t *path_list)
             path_list->robots = next;
         }
         pnext = path_list->next;
+        free_path(path_list->path);
         free(path_list);
         path_list = pnext;
     }
