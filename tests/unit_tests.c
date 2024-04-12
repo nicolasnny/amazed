@@ -61,5 +61,5 @@ Test(unit_test, find_shortest_path_with_wrong_initializers)
     int *link_array[] = {a1, a2, a3, NULL};
 
     cr_assert_null(find_shortest_path(NULL, link_array));
-    cr_assert_null(find_shortest_path(NULL, link_array));
+    cr_assert_null(find_shortest_path(NULL, NULL));
 }
