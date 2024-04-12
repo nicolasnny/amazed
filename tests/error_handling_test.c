@@ -49,50 +49,49 @@ Test(error_handling, nb_valid_lines) {
     char *invalid_input2[] = {"##start", "0 1", NULL};
     char *invalid_input3[] = {"", NULL};
 
-    cr_assert(get_nb_valid_lines(valid_input) == 10);
-    cr_assert(get_nb_valid_lines(invalid_input1) == 0);
-    cr_assert(get_nb_valid_lines(invalid_input3) == 0);
+    cr_assert(get_nb_valid_lines(my_str_array_dup(valid_input)) == 10);
+    cr_assert(get_nb_valid_lines(my_str_array_dup(invalid_input1)) == 0);
+    cr_assert(get_nb_valid_lines(my_str_array_dup(invalid_input3)) == 0);
 }
 
-// Test(error_handling, valid_part) {
-//     char *valid_input[] = {
-//         "34",
-//         "##start",
-//         "0 1 0",
-//         "##end",
-//         "1 13 0 #bedroom",
-//         "2 5 0",
-//         "3 9 0",
-//         "0-2",
-//         "2-3",
-//         "3-1",
-//         NULL
-//     };
-//     char **valid_result = get_valid_part(valid_input);
+Test(error_handling, valid_part) {
+    char *valid_input[] = {
+        "34",
+        "##start",
+        "0 1 0",
+        "##end",
+        "1 13 0 #bedroom",
+        "2 5 0",
+        "3 9 0",
+        "0-2",
+        "2-3",
+        "3-1",
+        NULL
+    };
+    char **valid_result = get_valid_part(my_str_array_dup(valid_input));
 
-//     cr_assert_not_null(valid_result);
-//     cr_assert(my_str_array_cmp(valid_result, valid_input));
-//     cr_assert_null(valid_result[10]);
-//     free_str_array(valid_result);
-// }
+    cr_assert_not_null(valid_result);
+    cr_assert(my_str_array_cmp(valid_result, valid_input));
+    cr_assert_null(valid_result[10]);
+    free_str_array(valid_result);
+}
 
-// Test(error_handling, unvalid_room) {
-//     char *unvalid_input[] = {
-//         "34",
-//         "##start",
-//         "0 1 0",
-//         "##end",
-//         "1 13 0 unvalidnoiazhdoi azoidhaiozdh #bedroom",
-//         "2 5 0",
-//         "3 9 0",
-//         "0-2",
-//         "2-3",
-//         "3-1",
-//         NULL
-//     };
-//     char **unvalid_result = get_valid_part(unvalid_input);
+Test(error_handling, unvalid_room) {
+    char *unvalid_input[] = {
+        "34",
+        "##start",
+        "0 1 0",
+        "##end",
+        "1 13 0 unvalidnoiazhdoi azoidhaiozdh #bedroom",
+        "2 5 0",
+        "3 9 0",
+        "0-2",
+        "2-3",
+        "3-1",
+        NULL
+    };
+    char **unvalid_result = get_valid_part(my_str_array_dup(unvalid_input));
 
-//     cr_assert_not_null(unvalid_result);
-//     // cr_assert_arr_neq(unvalid_input, unvalid_result, );
-//     cr_assert_not(my_str_array_cmp(unvalid_result, unvalid_input));
-// }
+    cr_assert_not_null(unvalid_result);
+    cr_assert(my_str_array_cmp(unvalid_result, unvalid_input));
+}
