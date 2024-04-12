@@ -25,4 +25,5 @@ static void disp_logo(void)
 int disp_help(void)
 {
     disp_logo();
+    return 0;
 }
