@@ -90,9 +90,11 @@ static int start_algo(linked_list_t *rooms, char **connections, char **data)
     path_list = get_path_list(data, rooms, link_array);
     if (!path_list) {
         print_str_array(data);
+        main_free(rooms, path_list);
         return ERROR;
     }
     print_basic_output(rooms, data, connections, path_list);
+    main_free(rooms, path_list);
     return SUCCESS;
 }
 

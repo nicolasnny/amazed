@@ -79,19 +79,24 @@ Test(unit_test, find_shortest_path_with_wrong_initializers)
     cr_assert_null(find_shortest_path(nodes, NULL));
 }
 
-/*Test()
+Test(unit_test, find_shortest_path_good_var)
 {
-    char *unvalid_input[] = {
+    int a1[] = {0, 0, 1, END_ARRAY};
+    int a2[] = {0, 0, 1, END_ARRAY};
+    int a3[] = {1, 1, 0, END_ARRAY};
+    int *link_array[] = {a1, a2, a3, NULL};
+    char *chars[] = {
         "34",
         "##start",
         "0 1 0",
         "##end",
-        "1 13 0 unvalidnoiazhdoi azoidhaiozdh #bedroom",
+        "1 13 0",
         "2 5 0",
-        "3 9 0",
         "0-2",
-        "2-3",
-        "3-1",
+        "2-1",
         NULL
     };
-    }*/
+    linked_list_t *nodes = get_rooms(chars);
+
+    cr_assert_not_null(find_shortest_path(nodes, link_array));  //test with valid path
+}
