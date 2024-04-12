@@ -72,3 +72,15 @@ void main_free(linked_list_t *rooms, path_list_t *path_list, char **data)
     free_robots(path_list);
     free_rooms(rooms);
 }
+
+void free_input(input_t *input)
+{
+    input_t *next = NULL;
+
+    while (input != NULL) {
+        next = input->next;
+        free(input->buffer);
+        free(input);
+        input = next;
+    }
+}
