@@ -58,7 +58,4 @@ make
 
 ## Visual Rendering
 Using ncurse C library me and my team were able to generate a more visual rendering than the simple output shown above
-<video width="640" height="360" controls>
-  <source src="bonus_demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<img src="bonus_demo.gif" alt="Visual Rendering">
