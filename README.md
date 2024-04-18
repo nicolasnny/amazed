@@ -55,3 +55,10 @@ make
 - Ensures each room is visited by only one robot at a time.
 - Calculates the shortest path for robot to reach the exit.
 - Input file specifies the number of robots, rooms, room connections, tunnels, and moves made by robots.
+
+## Visual Rendering
+Using ncurse C library me and my team were able to generate a more visual rendering than the simple output shown above
+<video width="640" height="360" controls>
+  <source src="chemin_vers_votre_video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
