@@ -55,4 +55,3 @@ make
 - Ensures each room is visited by only one robot at a time.
 - Calculates the shortest path for robot to reach the exit.
 - Input file specifies the number of robots, rooms, room connections, tunnels, and moves made by robots.
-```
