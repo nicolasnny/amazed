@@ -1,4 +1,4 @@
-# Amazed
+# Amazed - 3 weeks
 
 Amazed is a C project designed to simulate a scenario where a certain number of robots need to traverse through various rooms to reach the exit, ensuring each room is visited by only one robot at a time. The objective is to reach the exit with the fewest possible moves, utilizing BFS's algorithm for pathfinding.
 
