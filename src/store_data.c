@@ -41,7 +41,7 @@ static int name2id(char *name, linked_list_t *node_list)
             return node_list->node->id;
         node_list = node_list->next;
     }
-    return -1;
+    return 0;
 }
 
 static char **separate_by_name(char *buffer, linked_list_t *node_list)
@@ -59,7 +59,8 @@ static char **separate_by_name(char *buffer, linked_list_t *node_list)
     res[0] = my_strdup(temp->node->name);
     rest_to_cpy = my_strlen(buffer) - my_strlen(temp->node->name);
     res[1] = malloc(sizeof(char) * rest_to_cpy);
-    for (int i = my_strlen(buffer) - 1; counter < rest_to_cpy; counter++) {
+    for (int i = my_strlen(buffer) - 1; counter < rest_to_cpy &&
+        i >= 0; counter++) {
         res[1][counter] = buffer[i];
         i--;
     }

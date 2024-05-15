@@ -16,9 +16,9 @@ static void set_node_content(linked_list_t *new_node, char **content_array)
 
     new_node->node = malloc(sizeof(node_t));
     new_node->node->id = id;
-    new_node->node->name = my_strdup(content_array[0]);
-    if (!content_array[1] || !content_array[2])
+    if (!content_array[1] || !content_array[2] || !content_array[0])
         return;
+    new_node->node->name = my_strdup(content_array[0]);
     new_node->node->x = my_getnbr(content_array[1]);
     new_node->node->y = my_getnbr(content_array[2]);
     new_node->node->is_occupied = false;
@@ -34,9 +34,9 @@ static linked_list_t *insert_room(linked_list_t *rooms, char **array, int i)
     set_node_content(new_node, content_array);
     new_node->node->start = false;
     new_node->node->end = false;
-    if (my_strcmp(array[i - 1], "##start") == 0)
+    if (i > 0 && my_strcmp(array[i - 1], "##start") == 0)
         new_node->node->start = true;
-    if (my_strcmp(array[i - 1], "##end") == 0)
+    if (i > 0 && my_strcmp(array[i - 1], "##end") == 0)
         new_node->node->end = true;
     new_node->next = rooms;
     new_node->node->checked = false;
